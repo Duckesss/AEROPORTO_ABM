@@ -7,12 +7,17 @@ use std.textio.all;
 
 entity aeroporto is
 port(
-		ListaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
-		ListaPouso	:	out std_logic_vector (3 downto 0);
-		Tempestade	:	in std_logic_vector (3 downto 0);
-		Peso			: 	in std_logic_vector (3 downto 0);
-		Incidente	:	in std_logic_vector (3 downto 0);
-		clock : in std_logic
+		listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
+		listaPouso		:	out std_logic_vector (3 downto 0);
+		tempestade		:	in std_logic;
+		peso			: 	in std_logic;
+		imprevisto		:	in std_logic;
+		tempo			:  in std_logic; --Não sei se de fato o tempo será booleano, minha ideia é fazer igual ao flag_write
+		--que tá no código do tb_funcao da pratica 10
+		decolar 		:  in std_logic;
+		pousar 			:  in std_logic;
+		pistaLivre		:  in std_logic;
+		clock 			: in std_logic
 );
 end aeroporto;
 
@@ -23,7 +28,6 @@ architecture arch of aeroporto is
 	
 begin
 	process(clock, EA) -- Toda vez que o clock ou o estado mudar o process deve ser checado
-		variable pistaLivre, pousar, decolar, imprevisto, peso, clima, tempo : std_logic;
 		--variavel tempo é especial e vai ter que ter uma funcao p/ habilitá-la com 1 ou 0
 	begin
 	if (pousar = '0' and decolar = '0') then -- enquanto não há tráfego o estado pernece em AF
