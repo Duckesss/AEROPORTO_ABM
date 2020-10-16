@@ -16,6 +16,7 @@ port(
 		tempo			:  in std_logic; --Não sei se de fato o tempo será booleano, minha ideia é fazer igual ao flag_write
 		--que tá no código do tb_funcao da pratica 10
 		decolar 		:  in std_logic;
+		clima 		:  in std_logic;
 		pousar 			:  in std_logic;
 		pistaLivre		:  in std_logic;
 		clock 			: in std_logic
