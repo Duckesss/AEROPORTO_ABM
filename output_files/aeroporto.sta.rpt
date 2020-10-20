@@ -1,0 +1,771 @@
+TimeQuest Timing Analyzer report for aeroporto
+Tue Oct 20 01:32:22 2020
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Slow Model Fmax Summary
+  6. Slow Model Setup Summary
+  7. Slow Model Hold Summary
+  8. Slow Model Recovery Summary
+  9. Slow Model Removal Summary
+ 10. Slow Model Minimum Pulse Width Summary
+ 11. Slow Model Setup: 'clock'
+ 12. Slow Model Hold: 'clock'
+ 13. Slow Model Minimum Pulse Width: 'clock'
+ 14. Setup Times
+ 15. Hold Times
+ 16. Clock to Output Times
+ 17. Minimum Clock to Output Times
+ 18. Propagation Delay
+ 19. Minimum Propagation Delay
+ 20. Fast Model Setup Summary
+ 21. Fast Model Hold Summary
+ 22. Fast Model Recovery Summary
+ 23. Fast Model Removal Summary
+ 24. Fast Model Minimum Pulse Width Summary
+ 25. Fast Model Setup: 'clock'
+ 26. Fast Model Hold: 'clock'
+ 27. Fast Model Minimum Pulse Width: 'clock'
+ 28. Setup Times
+ 29. Hold Times
+ 30. Clock to Output Times
+ 31. Minimum Clock to Output Times
+ 32. Propagation Delay
+ 33. Minimum Propagation Delay
+ 34. Multicorner Timing Analysis Summary
+ 35. Setup Times
+ 36. Hold Times
+ 37. Clock to Output Times
+ 38. Minimum Clock to Output Times
+ 39. Progagation Delay
+ 40. Minimum Progagation Delay
+ 41. Setup Transfers
+ 42. Hold Transfers
+ 43. Report TCCS
+ 44. Report RSKM
+ 45. Unconstrained Paths
+ 46. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                                      ;
++--------------------+-------------------------------------------------------------------+
+; Quartus II Version ; Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition ;
+; Revision Name      ; aeroporto                                                         ;
+; Device Family      ; Cyclone II                                                        ;
+; Device Name        ; EP2C35F672C6                                                      ;
+; Timing Models      ; Final                                                             ;
+; Delay Model        ; Combined                                                          ;
+; Rise/Fall Delays   ; Unavailable                                                       ;
++--------------------+-------------------------------------------------------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                            ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets   ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+; clock      ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-----------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Slow Model Fmax Summary                                                                                   ;
++------------+-----------------+------------+---------------------------------------------------------------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note                                                          ;
++------------+-----------------+------------+---------------------------------------------------------------+
+; 537.63 MHz ; 420.17 MHz      ; clock      ; limit due to minimum period restriction (max I/O toggle rate) ;
++------------+-----------------+------------+---------------------------------------------------------------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++--------------------------------+
+; Slow Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clock ; -0.860 ; -4.943        ;
++-------+--------+---------------+
+
+
++-------------------------------+
+; Slow Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clock ; 0.391 ; 0.000         ;
++-------+-------+---------------+
+
+
+-------------------------------
+; Slow Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Slow Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++----------------------------------------+
+; Slow Model Minimum Pulse Width Summary ;
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clock ; -1.380 ; -9.380                ;
++-------+--------+-----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clock'                                                                                                        ;
++--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; -0.860 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.896      ;
+; -0.750 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; 0.001      ; 1.787      ;
+; -0.750 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; 0.001      ; 1.787      ;
+; -0.750 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; 0.001      ; 1.787      ;
+; -0.708 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.744      ;
+; -0.676 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.712      ;
+; -0.614 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.650      ;
+; -0.571 ; count[1]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.607      ;
+; -0.543 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.579      ;
+; -0.508 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.544      ;
+; -0.500 ; count[1]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.536      ;
+; -0.498 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.534      ;
+; -0.489 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 1.525      ;
+; -0.455 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.491      ;
+; -0.448 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.484      ;
+; -0.369 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 1.405      ;
+; -0.313 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.349      ;
+; -0.310 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.346      ;
+; -0.309 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.345      ;
+; -0.299 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.335      ;
+; -0.170 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; 0.001      ; 1.207      ;
+; -0.160 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.196      ;
+; -0.066 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.102      ;
+; -0.062 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.098      ;
+; -0.025 ; count[1]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.061      ;
+; 0.245  ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.791      ;
+; 0.379  ; count[0]                ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.657      ;
++--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clock'                                                                                                        ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; count[0]                ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.525 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.791      ;
+; 0.795 ; count[1]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.061      ;
+; 0.826 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.092      ;
+; 0.832 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.098      ;
+; 0.836 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.102      ;
+; 0.846 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.112      ;
+; 0.930 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.196      ;
+; 0.940 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; 0.001      ; 1.207      ;
+; 1.069 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.335      ;
+; 1.079 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.345      ;
+; 1.080 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.346      ;
+; 1.139 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 1.405      ;
+; 1.218 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.484      ;
+; 1.225 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.491      ;
+; 1.270 ; count[1]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.536      ;
+; 1.278 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.544      ;
+; 1.313 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.579      ;
+; 1.336 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.602      ;
+; 1.341 ; count[1]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.607      ;
+; 1.384 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.650      ;
+; 1.446 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.712      ;
+; 1.488 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.754      ;
+; 1.520 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; 0.001      ; 1.787      ;
+; 1.520 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; 0.001      ; 1.787      ;
+; 1.520 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; 0.001      ; 1.787      ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clock'                                                                      ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                      ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clock ; Rise       ; clock                       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.AeroportoFuncionando     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.AeroportoFuncionando     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Decolando                ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Decolando                ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Espera                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Espera                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Pousando                 ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Pousando                 ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[3]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[3]                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.AeroportoFuncionando|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.AeroportoFuncionando|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Decolando|clk            ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Decolando|clk            ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Espera|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Espera|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Pousando|clk             ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Pousando|clk             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[0]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[0]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[1]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[1]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[2]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[2]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[3]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[3]|clk                ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+
+
++------------------------------------------------------------------------+
+; Setup Times                                                            ;
++------------+------------+-------+-------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------+------------+-------+-------+------------+-----------------+
+; decolar    ; clock      ; 5.028 ; 5.028 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 5.105 ; 5.105 ; Rise       ; clock           ;
+; peso       ; clock      ; 4.835 ; 4.835 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 5.177 ; 5.177 ; Rise       ; clock           ;
+; pousar     ; clock      ; 4.605 ; 4.605 ; Rise       ; clock           ;
+; tempestade ; clock      ; 4.477 ; 4.477 ; Rise       ; clock           ;
+; tempo      ; clock      ; 5.495 ; 5.495 ; Rise       ; clock           ;
++------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Hold Times                                                               ;
++------------+------------+--------+--------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++------------+------------+--------+--------+------------+-----------------+
+; decolar    ; clock      ; -3.727 ; -3.727 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -3.818 ; -3.818 ; Rise       ; clock           ;
+; peso       ; clock      ; -4.242 ; -4.242 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -3.890 ; -3.890 ; Rise       ; clock           ;
+; pousar     ; clock      ; -3.733 ; -3.733 ; Rise       ; clock           ;
+; tempestade ; clock      ; -3.298 ; -3.298 ; Rise       ; clock           ;
+; tempo      ; clock      ; -3.892 ; -3.892 ; Rise       ; clock           ;
++------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Clock to Output Times                                                    ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 6.552 ; 6.552 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.345 ; 6.345 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.359 ; 6.359 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.342 ; 6.342 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.552 ; 6.552 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                            ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 6.342 ; 6.342 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.345 ; 6.345 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.359 ; 6.359 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.342 ; 6.342 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.552 ; 6.552 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++----------------------------------------------------+
+; Propagation Delay                                  ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 8.801 ;    ;    ; 8.801 ;
++------------+-------------+-------+----+----+-------+
+
+
++----------------------------------------------------+
+; Minimum Propagation Delay                          ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 8.801 ;    ;    ; 8.801 ;
++------------+-------------+-------+----+----+-------+
+
+
++-------------------------------+
+; Fast Model Setup Summary      ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clock ; 0.124 ; 0.000         ;
++-------+-------+---------------+
+
+
++-------------------------------+
+; Fast Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clock ; 0.215 ; 0.000         ;
++-------+-------+---------------+
+
+
+-------------------------------
+; Fast Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Fast Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++----------------------------------------+
+; Fast Model Minimum Pulse Width Summary ;
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clock ; -1.380 ; -9.380                ;
++-------+--------+-----------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clock'                                                                                                       ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; 0.124 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; 0.001      ; 0.909      ;
+; 0.124 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; 0.001      ; 0.909      ;
+; 0.124 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; 0.001      ; 0.909      ;
+; 0.177 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.855      ;
+; 0.234 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.798      ;
+; 0.246 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.786      ;
+; 0.280 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.752      ;
+; 0.296 ; count[1]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.736      ;
+; 0.315 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.717      ;
+; 0.315 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.717      ;
+; 0.322 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 0.710      ;
+; 0.324 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.708      ;
+; 0.331 ; count[1]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.701      ;
+; 0.338 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.694      ;
+; 0.372 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.660      ;
+; 0.375 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 0.657      ;
+; 0.400 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.632      ;
+; 0.402 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.630      ;
+; 0.403 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.629      ;
+; 0.405 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.627      ;
+; 0.459 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; 0.001      ; 0.574      ;
+; 0.465 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.567      ;
+; 0.509 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.523      ;
+; 0.512 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.520      ;
+; 0.521 ; count[1]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.511      ;
+; 0.640 ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.392      ;
+; 0.665 ; count[0]                ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.367      ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clock'                                                                                                        ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; count[0]                ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.367      ;
+; 0.240 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.392      ;
+; 0.359 ; count[1]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.511      ;
+; 0.368 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.520      ;
+; 0.371 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.523      ;
+; 0.377 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.529      ;
+; 0.393 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.545      ;
+; 0.415 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.567      ;
+; 0.421 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; 0.001      ; 0.574      ;
+; 0.477 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.629      ;
+; 0.478 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.630      ;
+; 0.480 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.632      ;
+; 0.505 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.657      ;
+; 0.508 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.660      ;
+; 0.542 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.694      ;
+; 0.549 ; count[1]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.701      ;
+; 0.565 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.717      ;
+; 0.565 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.717      ;
+; 0.584 ; count[1]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.736      ;
+; 0.588 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.740      ;
+; 0.600 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.752      ;
+; 0.634 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.786      ;
+; 0.645 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.797      ;
+; 0.756 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; 0.001      ; 0.909      ;
+; 0.756 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; 0.001      ; 0.909      ;
+; 0.756 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; 0.001      ; 0.909      ;
++-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clock'                                                                      ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                      ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clock ; Rise       ; clock                       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.AeroportoFuncionando     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.AeroportoFuncionando     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Decolando                ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Decolando                ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Espera                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Espera                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; EA.Pousando                 ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Pousando                 ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clock ; Rise       ; count[3]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clock ; Rise       ; count[3]                    ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.AeroportoFuncionando|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.AeroportoFuncionando|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Decolando|clk            ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Decolando|clk            ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Espera|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Espera|clk               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; EA.Pousando|clk             ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; EA.Pousando|clk             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; clock~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; clock~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[0]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[0]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[1]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[1]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[2]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[2]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clock ; Rise       ; count[3]|clk                ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clock ; Rise       ; count[3]|clk                ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------+
+
+
++------------------------------------------------------------------------+
+; Setup Times                                                            ;
++------------+------------+-------+-------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------+------------+-------+-------+------------+-----------------+
+; decolar    ; clock      ; 2.550 ; 2.550 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 2.571 ; 2.571 ; Rise       ; clock           ;
+; peso       ; clock      ; 2.433 ; 2.433 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 2.627 ; 2.627 ; Rise       ; clock           ;
+; pousar     ; clock      ; 2.371 ; 2.371 ; Rise       ; clock           ;
+; tempestade ; clock      ; 2.286 ; 2.286 ; Rise       ; clock           ;
+; tempo      ; clock      ; 2.765 ; 2.765 ; Rise       ; clock           ;
++------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Hold Times                                                               ;
++------------+------------+--------+--------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++------------+------------+--------+--------+------------+-----------------+
+; decolar    ; clock      ; -1.938 ; -1.938 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -1.962 ; -1.962 ; Rise       ; clock           ;
+; peso       ; clock      ; -2.130 ; -2.130 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -2.018 ; -2.018 ; Rise       ; clock           ;
+; pousar     ; clock      ; -1.953 ; -1.953 ; Rise       ; clock           ;
+; tempestade ; clock      ; -1.760 ; -1.760 ; Rise       ; clock           ;
+; tempo      ; clock      ; -2.001 ; -2.001 ; Rise       ; clock           ;
++------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Clock to Output Times                                                    ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 3.713 ; 3.713 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.626 ; 3.626 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.634 ; 3.634 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.625 ; 3.625 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.713 ; 3.713 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                            ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 3.625 ; 3.625 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.626 ; 3.626 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.634 ; 3.634 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.625 ; 3.625 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.713 ; 3.713 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++----------------------------------------------------+
+; Propagation Delay                                  ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 5.005 ;    ;    ; 5.005 ;
++------------+-------------+-------+----+----+-------+
+
+
++----------------------------------------------------+
+; Minimum Propagation Delay                          ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 5.005 ;    ;    ; 5.005 ;
++------------+-------------+-------+----+----+-------+
+
+
++------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                          ;
++------------------+--------+-------+----------+---------+---------------------+
+; Clock            ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+--------+-------+----------+---------+---------------------+
+; Worst-case Slack ; -0.860 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  clock           ; -0.860 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; -4.943 ; 0.0   ; 0.0      ; 0.0     ; -9.38               ;
+;  clock           ; -4.943 ; 0.000 ; N/A      ; N/A     ; -9.380              ;
++------------------+--------+-------+----------+---------+---------------------+
+
+
++------------------------------------------------------------------------+
+; Setup Times                                                            ;
++------------+------------+-------+-------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++------------+------------+-------+-------+------------+-----------------+
+; decolar    ; clock      ; 5.028 ; 5.028 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 5.105 ; 5.105 ; Rise       ; clock           ;
+; peso       ; clock      ; 4.835 ; 4.835 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 5.177 ; 5.177 ; Rise       ; clock           ;
+; pousar     ; clock      ; 4.605 ; 4.605 ; Rise       ; clock           ;
+; tempestade ; clock      ; 4.477 ; 4.477 ; Rise       ; clock           ;
+; tempo      ; clock      ; 5.495 ; 5.495 ; Rise       ; clock           ;
++------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Hold Times                                                               ;
++------------+------------+--------+--------+------------+-----------------+
+; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++------------+------------+--------+--------+------------+-----------------+
+; decolar    ; clock      ; -1.938 ; -1.938 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -1.962 ; -1.962 ; Rise       ; clock           ;
+; peso       ; clock      ; -2.130 ; -2.130 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -2.018 ; -2.018 ; Rise       ; clock           ;
+; pousar     ; clock      ; -1.953 ; -1.953 ; Rise       ; clock           ;
+; tempestade ; clock      ; -1.760 ; -1.760 ; Rise       ; clock           ;
+; tempo      ; clock      ; -2.001 ; -2.001 ; Rise       ; clock           ;
++------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Clock to Output Times                                                    ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 6.552 ; 6.552 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.345 ; 6.345 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.359 ; 6.359 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.342 ; 6.342 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.552 ; 6.552 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                            ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; contador[*]  ; clock      ; 3.625 ; 3.625 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.626 ; 3.626 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.634 ; 3.634 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.625 ; 3.625 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.713 ; 3.713 ; Rise       ; clock           ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++----------------------------------------------------+
+; Progagation Delay                                  ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 8.801 ;    ;    ; 8.801 ;
++------------+-------------+-------+----+----+-------+
+
+
++----------------------------------------------------+
+; Minimum Progagation Delay                          ;
++------------+-------------+-------+----+----+-------+
+; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
++------------+-------------+-------+----+----+-------+
+; tempo      ; alarme      ; 5.005 ;    ;    ; 5.005 ;
++------------+-------------+-------+----+----+-------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clock      ; clock    ; 32       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clock      ; clock    ; 32       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 7     ; 7    ;
+; Unconstrained Input Port Paths  ; 45    ; 45   ;
+; Unconstrained Output Ports      ; 5     ; 5    ;
+; Unconstrained Output Port Paths ; 5     ; 5    ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Oct 20 01:32:20 2020
+Info: Command: quartus_sta aeroporto -c aeroporto
+Info: qsta_default_script.tcl version: #1
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'aeroporto.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clock clock
+Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Analyzing Slow Model
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -0.860
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -0.860        -4.943 clock 
+Info (332146): Worst-case hold slack is 0.391
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.391         0.000 clock 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380        -9.380 clock 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info: Analyzing Fast Model
+Info (332146): Worst-case setup slack is 0.124
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.124         0.000 clock 
+Info (332146): Worst-case hold slack is 0.215
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.215         0.000 clock 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380        -9.380 clock 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 4521 megabytes
+    Info: Processing ended: Tue Oct 20 01:32:22 2020
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+

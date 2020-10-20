@@ -1,0 +1,7 @@
+
+State Machine - |aeroporto|EA
+Name EA.Espera EA.Decolando EA.Pousando EA.AeroportoFuncionando 
+EA.AeroportoFuncionando 0 0 0 0 
+EA.Pousando 0 0 1 1 
+EA.Decolando 0 1 0 1 
+EA.Espera 1 0 0 1 
