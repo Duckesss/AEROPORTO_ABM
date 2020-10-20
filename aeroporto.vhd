@@ -20,9 +20,21 @@ port(
 		pistaLivre		:  in std_logic;
 		clock 			: in std_logic;
 		alarme 			: out std_logic;
+		tempo_decorrido : out std_logic;	
 		contador			: out integer range 0 to 10
 );
+
+
+-------------------------------------------------------------------------------------
+------------------------   DECLARAÇÃO DE ATRIBUTOS    -------------------------------
+-------------------------------------------------------------------------------------
+--attribute temp_deco_Tempestade : std_logic;
+--attribute temp_deco_Tempestade of tempestade : signal is tempestade(tempestade'last_event);
+
+
 end aeroporto;
+
+
 
 architecture arch of aeroporto is
 	type estado is (AeroportoFuncionando, Pousando, Decolando, Espera);		--Os 4 estados da nossa FSM
@@ -44,9 +56,10 @@ begin
 					EA <= Decolando;
 					count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
 					-- o count não esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
+					--Não faz sentido por ele aqui, pq a FSM irá entrar aqui várias vezes, acho que o correto é estar
+					--na transição do fim do pouso ou decolagem
 				elsif (pousar = '1' and imprevisto = '0' and peso = '0' and pistaLivre = '1') then
 					EA <= Pousando;
-					--alarme <= '1';
 				elsif (imprevisto = '1' or peso = '1' or pistaLivre = '0') then
 					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, não?
 					EA <= AeroportoFuncionando;
@@ -77,5 +90,7 @@ begin
 	alarme <= tempo; -- o alarme deve ser igual ao tempo, pq enquanto ele for 1 tem aviao decolando ou pousando
 						  -- e quando o tempo for 0 nao tem nada acontecendo
 	contador <= count; 
+	
+	--tempo_decorrido <= temp_deco_Tempestade;
 	end process;
 end arch;

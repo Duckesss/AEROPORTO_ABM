@@ -15,14 +15,15 @@ component aeroporto is
 	port (	listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
 				listaPouso		:	out std_logic_vector (3 downto 0);
 				tempestade		:	in std_logic;
-				peso			: 	in std_logic;
+				peso				: 	in std_logic;
 				imprevisto		:	in std_logic;
-				tempo			:  in std_logic;
-				decolar 		:  in std_logic;
+				tempo				:  in std_logic;
+				decolar 			:  in std_logic;
 				pousar 			:  in std_logic;
 				pistaLivre		:  in std_logic;
 				contador			: out integer range 0 to 10;
 				alarme			: out std_logic;
+				tempo_decorrido : out std_logic;
 				clock 			: in std_logic);
 end component;
 
@@ -32,13 +33,15 @@ end component;
 	signal Imprevisto, Decolar		: std_logic;
 	signal Pousar, PistaLivre 		: std_logic;
 	signal clk, Alarme            : std_logic;
+	signal Temp_Decorrido			: std_logic;
 	signal contador 					: integer;
 
 	signal read_data_in	: std_logic := '0';
+	signal read_data_in2	: std_logic := '0';
 	signal flag_write	: std_logic := '0';
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
-	file inputs_data_in2 : text open write_mode is "aviao_pousa.txt";
+	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
 	--file outputs2			: text open write_mode is "saida2.txt";
 
 	-- Clock period definitions
@@ -59,6 +62,7 @@ DUT : aeroporto
 		pousar=>Pousar,
 		pistaLivre=>PistaLivre,
 		alarme=>Alarme,
+		--tempo_decorrido => Temp_Decorrido,
 		contador=>contador,
 		clock=>clk
 	);
@@ -97,6 +101,28 @@ read_inputs_data_in : process
 	end loop;
 	wait;
 end process read_inputs_data_in;
+
+------------------------------------------------------------------------------------
+----------------- processo para ler os dados do arquivo aviao_pousa.txt
+------------------------------------------------------------------------------------
+read_inputs_data_in2 : process
+		variable linea : line;
+		variable input : std_logic_vector(3 downto 0);
+	begin
+	wait for 1 ns;--until falling_edge(clk);
+	while not endfile(inputs_data_in2) loop
+		if (tempo = '0' and decolar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then 
+		-- se tempo = 0 (sem aviao decolando ou pousando) e tem aviao p/ decolar e o peso for aceitavel
+		-- e a pista estiver livre, então se incia a leitura do arquivo quando isso acontece
+			readline(inputs_data_in,linea);
+			read(linea,input);
+			listaPouso <= input;
+		end if;
+		wait for period;
+	end loop;
+	wait;
+end process read_inputs_data_in2;
+
 ------------------------------------------------------------------------------------
 ----------------- processo para gerar os estimulos de entrada
 ------------------------------------------------------------------------------------
@@ -111,6 +137,18 @@ tb_estimulo : process
 		--wait;
 
 END process tb_estimulo;
+
+tb_estimulo2 : process
+	begin
+		--wait for 5 ns;
+			read_data_in2 <= '1';
+			for i in 1 to 8 loop --1 a 8 pq é a qntd de elementos na lista de decolagem
+				wait for 20 ns;
+			end loop;
+			read_data_in2 <= '0';
+		--wait;
+
+END process tb_estimulo2;
 	
 ------------------------------------------------------------------------------------
 ----------------- processo para gerar os sinais de tempestade
