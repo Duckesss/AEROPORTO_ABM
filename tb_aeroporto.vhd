@@ -23,7 +23,7 @@ component aeroporto is
 				pousar 			:  in std_logic;
 				pistaLivre		:  in std_logic;
 				contador			: out integer range 0 to 10;
-				alarme			: out std_logic;
+				alarme			: in std_logic;
 				tempo_decorrido : out std_logic;
 				clock 			: in std_logic);
 end component;
@@ -43,11 +43,17 @@ end component;
 	signal flag_write	: std_logic := '0';
 	signal t1, t2, t3, t4			: time; -- t1 = duracao estado AF, t2 = duracao decola, t3 = duracao pouso
 	-- e t4 = duracao espera
+	signal p, d, e, af : std_logic := '0';
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
 	file tempo_estado    : text open read_mode is "duracao_estado.txt";
-	--file outputs2			: text open write_mode is "saida2.txt";
+	file outputs1			: text open write_mode is "saida1.txt";
+	
+	constant decola 	: string (1 to 17) := "Tempo decolando: ";
+	constant pousa 	: string (1 to 16) := "Tempo pousando: ";
+	constant aeroportoFunciona 	: string (1 to 10) := "Tempo AE: ";
+	constant espera 	: string (1 to 14) := "Tempo espera: ";
 
 	-- Clock period definitions
    constant period     : time := 20 ns;
@@ -95,28 +101,54 @@ begin
 		for i in 1 to 100 loop	-- acontece imediatamente, é necessário add um tempo de espera
 		if (decolar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then
 			tempo <= '0';		-- entrar aqui significa que o aviao está decolando
+			alarme <= '1';
+			d <= '1';
+			e <= '0';
+			af <= '0';
+			p <= '0';
 			wait for (t2/2);	-- 5 ns
 			tempo <= '1';
+			alarme <= '1';
 			wait for (t2/2);	-- 5 ns, no total se passam 10 ns em cada decolagem
 		elsif (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then
 			tempo <= '0';		-- entrar aqui significa que o aviao está pousando
+			alarme <= '1';
+			p <= '1';
+			d <= '0';
+			e <= '0';
+			af <= '0';
 			wait for (t3/2);	-- 15 ns
 			tempo <= '1';
+			alarme <= '1';
 			wait for (t3/2);	-- 15 ns, no total se passam 30 ns em cada pouso
 		elsif ((imprevisto = '1' or peso = '1' or pistaLivre = '0') and tempestade = '0') then
 			tempo <= '0';		-- entrar aqui significa que o aviao está no estado AF
+			alarme <= '0';
+			p <= '0';
+			d <= '0';
+			e <= '0';
+			af <= '1';
 			wait for (t1/2);	-- 3 ns
 			tempo <= '1';
+			alarme <= '0';
 			wait for (t1/2);	-- 3 ns, no total se passam 6 ns em cada estado de AF
 		elsif (tempestade = '1') then
          tempo <= '0';		-- entrar aqui significa que o aviao está no estado Espera
+			alarme <= '0';
+			p <= '0';
+			d <= '0';
+			e <= '1';
+			af <= '0';
          wait for (t4/2);	-- 10 ns
          tempo <= '1';
+			alarme <= '0';
          wait for (t4/2);	-- 10 ns, no total se passam 20 ns em cada estado de Espera
 		else
+			alarme <= '0';
 			tempo <= '0';		-- Coloquei essa condição auxiliar, pois nem sempre uma das condições acima
          wait for 10 ns;	-- serão atendidas, então quando não for possível saber em qual estado está
          tempo <= '1';		--	o tempo passará a funcionar no mesmo tempo do clock. Isso pode ser consertado
+			alarme <= '0';
          wait for 10 ns;
 		end if;
       end loop;
@@ -129,7 +161,7 @@ read_inputs_data_in : process
 		variable linea : line;
 		variable input : std_logic_vector(3 downto 0);
 	begin
-	wait for 1.5 ns;--until falling_edge(clk);
+	wait for 1.5 ns;
 	while not endfile(inputs_data_in) loop
 		if (decolar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempo = '0') then 
 		-- se tempo = 0 (sem aviao decolando ou pousando) e tem aviao p/ decolar e o peso for aceitavel
@@ -193,6 +225,42 @@ dura_estado : process
 	wait;
 end process dura_estado;
 
+------------------------------------------------------------------------------------
+------ processo para escrever os dados de saida no saida.txt
+------------------------------------------------------------------------------------ 
+escreve_output : process
+	variable linea : line;
+	begin
+	wait for 0.1 ns;
+	
+	for i in 1 to 100 loop
+	if (flag_write <= '1') then
+	wait for 1 ns;
+		if (d = '1') then
+			write (linea, decola);
+			write (linea, t2);
+			writeline (outputs1, linea);	
+			wait for 10 ns;
+		elsif (p = '1') then
+			write (linea, pousa);
+			write (linea, t3);
+			writeline (outputs1, linea);
+			wait for 30 ns;
+		elsif (af = '1') then
+			write (linea, aeroportoFunciona);
+			write (linea, t1);
+			writeline (outputs1, linea);
+			wait for 6 ns;
+		elsif (e = '1') then
+			write (linea, espera);
+			write (linea, t4);
+			writeline (outputs1, linea);
+			wait for 20 ns;
+		end if;
+	end if;
+	end loop;
+	wait;
+end process escreve_output;
 ------------------------------------------------------------------------------------
 ------ processo para gerar os estimulos de escrita do arquivo de entrada
 ------------------------------------------------------------------------------------  

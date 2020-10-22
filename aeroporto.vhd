@@ -19,7 +19,7 @@ port(
 		pousar 			:  in std_logic;
 		pistaLivre		:  in std_logic;
 		clock 			: in std_logic;
-		alarme 			: out std_logic;
+		alarme 			: in std_logic;
 		tempo_decorrido: out std_logic;	
 		contador			: out integer range 0 to 10
 );
@@ -87,8 +87,7 @@ begin
 				end if;
 		end case;
 	end if;
-	--alarme <= tempo; -- o alarme deve ser igual ao tempo, pq enquanto ele for 1 tem aviao decolando ou pousando
-						  -- e quando o tempo for 0 nao tem nada acontecendo
+	
 	contador <= count; 
 	
 	--tempo_decorrido <= temp_deco_Tempestade;
