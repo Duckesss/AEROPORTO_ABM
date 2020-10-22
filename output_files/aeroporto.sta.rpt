@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for aeroporto
-Tue Oct 20 10:38:26 2020
+Wed Oct 21 23:44:10 2020
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -23,35 +23,29 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
  15. Hold Times
  16. Clock to Output Times
  17. Minimum Clock to Output Times
- 18. Propagation Delay
- 19. Minimum Propagation Delay
- 20. Fast Model Setup Summary
- 21. Fast Model Hold Summary
- 22. Fast Model Recovery Summary
- 23. Fast Model Removal Summary
- 24. Fast Model Minimum Pulse Width Summary
- 25. Fast Model Setup: 'clock'
- 26. Fast Model Hold: 'clock'
- 27. Fast Model Minimum Pulse Width: 'clock'
- 28. Setup Times
- 29. Hold Times
- 30. Clock to Output Times
- 31. Minimum Clock to Output Times
- 32. Propagation Delay
- 33. Minimum Propagation Delay
- 34. Multicorner Timing Analysis Summary
- 35. Setup Times
- 36. Hold Times
- 37. Clock to Output Times
- 38. Minimum Clock to Output Times
- 39. Progagation Delay
- 40. Minimum Progagation Delay
- 41. Setup Transfers
- 42. Hold Transfers
- 43. Report TCCS
- 44. Report RSKM
- 45. Unconstrained Paths
- 46. TimeQuest Timing Analyzer Messages
+ 18. Fast Model Setup Summary
+ 19. Fast Model Hold Summary
+ 20. Fast Model Recovery Summary
+ 21. Fast Model Removal Summary
+ 22. Fast Model Minimum Pulse Width Summary
+ 23. Fast Model Setup: 'clock'
+ 24. Fast Model Hold: 'clock'
+ 25. Fast Model Minimum Pulse Width: 'clock'
+ 26. Setup Times
+ 27. Hold Times
+ 28. Clock to Output Times
+ 29. Minimum Clock to Output Times
+ 30. Multicorner Timing Analysis Summary
+ 31. Setup Times
+ 32. Hold Times
+ 33. Clock to Output Times
+ 34. Minimum Clock to Output Times
+ 35. Setup Transfers
+ 36. Hold Transfers
+ 37. Report TCCS
+ 38. Report RSKM
+ 39. Unconstrained Paths
+ 40. TimeQuest Timing Analyzer Messages
 
 
 
@@ -112,7 +106,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------+-----------------+------------+---------------------------------------------------------------+
 ; Fmax       ; Restricted Fmax ; Clock Name ; Note                                                          ;
 +------------+-----------------+------------+---------------------------------------------------------------+
-; 535.62 MHz ; 420.17 MHz      ; clock      ; limit due to minimum period restriction (max I/O toggle rate) ;
+; 626.57 MHz ; 420.17 MHz      ; clock      ; limit due to minimum period restriction (max I/O toggle rate) ;
 +------------+-----------------+------------+---------------------------------------------------------------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -122,7 +116,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+---------------+
 ; Clock ; Slack  ; End Point TNS ;
 +-------+--------+---------------+
-; clock ; -0.867 ; -5.180        ;
+; clock ; -0.596 ; -3.675        ;
 +-------+--------+---------------+
 
 
@@ -161,32 +155,32 @@ No paths to report.
 +--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack  ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
-; -0.867 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.903      ;
-; -0.774 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 1.810      ;
-; -0.744 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; -0.001     ; 1.779      ;
-; -0.744 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; -0.001     ; 1.779      ;
-; -0.744 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; -0.001     ; 1.779      ;
-; -0.711 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.747      ;
-; -0.627 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.663      ;
-; -0.515 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.551      ;
-; -0.500 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.536      ;
-; -0.493 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 1.529      ;
-; -0.492 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.528      ;
+; -0.596 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.632      ;
+; -0.583 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.619      ;
+; -0.583 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.619      ;
+; -0.583 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.619      ;
+; -0.574 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 1.610      ;
+; -0.529 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.565      ;
 ; -0.479 ; count[1]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.515      ;
-; -0.458 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.494      ;
-; -0.444 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.480      ;
-; -0.408 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.444      ;
+; -0.474 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.001      ; 1.511      ;
+; -0.462 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; -0.001     ; 1.497      ;
+; -0.458 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.494      ;
+; -0.414 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.450      ;
 ; -0.408 ; count[1]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.444      ;
-; -0.330 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.366      ;
-; -0.327 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.363      ;
-; -0.316 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.352      ;
-; -0.188 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; -0.001     ; 1.223      ;
-; -0.168 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 1.204      ;
-; -0.159 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.195      ;
-; -0.057 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.093      ;
-; -0.025 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.061      ;
+; -0.354 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.001      ; 1.391      ;
+; -0.350 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.001      ; 1.387      ;
+; -0.322 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; -0.001     ; 1.357      ;
+; -0.301 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.337      ;
+; -0.294 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.330      ;
+; -0.246 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; -0.001     ; 1.281      ;
+; -0.209 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; -0.001     ; 1.244      ;
+; -0.173 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 1.209      ;
+; -0.073 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 1.109      ;
+; -0.071 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.107      ;
+; -0.031 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.067      ;
 ; -0.025 ; count[1]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.061      ;
-; -0.024 ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 1.060      ;
+; 0.227  ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.809      ;
+; 0.241  ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.795      ;
 ; 0.379  ; count[0]                ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.657      ;
 +--------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 
@@ -198,31 +192,31 @@ No paths to report.
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 ; 0.391 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; count[0]                ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.657      ;
-; 0.794 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.060      ;
+; 0.529 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.795      ;
+; 0.543 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.809      ;
 ; 0.795 ; count[1]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.061      ;
-; 0.795 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.061      ;
-; 0.826 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.092      ;
-; 0.827 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.093      ;
-; 0.857 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.123      ;
-; 0.929 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.195      ;
-; 0.938 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.204      ;
-; 0.958 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; -0.001     ; 1.223      ;
-; 1.086 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.352      ;
-; 1.178 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.444      ;
+; 0.801 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.067      ;
+; 0.841 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.107      ;
+; 0.843 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.109      ;
+; 0.943 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.209      ;
+; 0.979 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; -0.001     ; 1.244      ;
+; 0.993 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.001      ; 1.260      ;
+; 1.016 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; -0.001     ; 1.281      ;
+; 1.064 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.330      ;
+; 1.071 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.337      ;
+; 1.092 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; -0.001     ; 1.357      ;
+; 1.120 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.001      ; 1.387      ;
+; 1.124 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.001      ; 1.391      ;
 ; 1.178 ; count[1]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.444      ;
-; 1.214 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.480      ;
-; 1.228 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.494      ;
+; 1.184 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.450      ;
+; 1.228 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.494      ;
+; 1.232 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; -0.001     ; 1.497      ;
 ; 1.249 ; count[1]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.515      ;
-; 1.262 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 1.528      ;
-; 1.270 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.536      ;
-; 1.285 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.551      ;
-; 1.331 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.597      ;
-; 1.397 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.663      ;
-; 1.487 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 1.753      ;
-; 1.514 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; -0.001     ; 1.779      ;
-; 1.514 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; -0.001     ; 1.779      ;
-; 1.514 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; -0.001     ; 1.779      ;
-; 1.544 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 1.810      ;
+; 1.299 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.565      ;
+; 1.353 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.619      ;
+; 1.353 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.619      ;
+; 1.353 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 1.619      ;
+; 1.366 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 1.632      ;
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -278,13 +272,13 @@ No paths to report.
 +------------+------------+-------+-------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +------------+------------+-------+-------+------------+-----------------+
-; decolar    ; clock      ; 5.337 ; 5.337 ; Rise       ; clock           ;
-; imprevisto ; clock      ; 4.943 ; 4.943 ; Rise       ; clock           ;
-; peso       ; clock      ; 4.528 ; 4.528 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; 5.079 ; 5.079 ; Rise       ; clock           ;
-; pousar     ; clock      ; 4.151 ; 4.151 ; Rise       ; clock           ;
-; tempestade ; clock      ; 4.695 ; 4.695 ; Rise       ; clock           ;
-; tempo      ; clock      ; 5.014 ; 5.014 ; Rise       ; clock           ;
+; decolar    ; clock      ; 5.041 ; 5.041 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 5.165 ; 5.165 ; Rise       ; clock           ;
+; peso       ; clock      ; 4.745 ; 4.745 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 4.840 ; 4.840 ; Rise       ; clock           ;
+; pousar     ; clock      ; 4.714 ; 4.714 ; Rise       ; clock           ;
+; tempestade ; clock      ; 4.036 ; 4.036 ; Rise       ; clock           ;
+; tempo      ; clock      ; 4.228 ; 4.228 ; Rise       ; clock           ;
 +------------+------------+-------+-------+------------+-----------------+
 
 
@@ -293,13 +287,13 @@ No paths to report.
 +------------+------------+--------+--------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +------------+------------+--------+--------+------------+-----------------+
-; decolar    ; clock      ; -4.112 ; -4.112 ; Rise       ; clock           ;
-; imprevisto ; clock      ; -3.913 ; -3.913 ; Rise       ; clock           ;
-; peso       ; clock      ; -4.028 ; -4.028 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; -4.049 ; -4.049 ; Rise       ; clock           ;
-; pousar     ; clock      ; -3.757 ; -3.757 ; Rise       ; clock           ;
-; tempestade ; clock      ; -3.336 ; -3.336 ; Rise       ; clock           ;
-; tempo      ; clock      ; -3.775 ; -3.775 ; Rise       ; clock           ;
+; decolar    ; clock      ; -3.662 ; -3.662 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -4.104 ; -4.104 ; Rise       ; clock           ;
+; peso       ; clock      ; -3.684 ; -3.684 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -3.779 ; -3.779 ; Rise       ; clock           ;
+; pousar     ; clock      ; -3.444 ; -3.444 ; Rise       ; clock           ;
+; tempestade ; clock      ; -3.048 ; -3.048 ; Rise       ; clock           ;
+; tempo      ; clock      ; -3.839 ; -3.839 ; Rise       ; clock           ;
 +------------+------------+--------+--------+------------+-----------------+
 
 
@@ -308,11 +302,11 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 6.581 ; 6.581 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 6.388 ; 6.388 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 6.386 ; 6.386 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 6.581 ; 6.581 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 6.368 ; 6.368 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.368 ; 6.368 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
 
 
@@ -321,30 +315,12 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 6.388 ; 6.388 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 6.386 ; 6.386 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 6.581 ; 6.581 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.368 ; 6.368 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
-
-
-+----------------------------------------------------+
-; Propagation Delay                                  ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 8.790 ;    ;    ; 8.790 ;
-+------------+-------------+-------+----+----+-------+
-
-
-+----------------------------------------------------+
-; Minimum Propagation Delay                          ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 8.790 ;    ;    ; 8.790 ;
-+------------+-------------+-------+----+----+-------+
 
 
 +-------------------------------+
@@ -352,7 +328,7 @@ No paths to report.
 +-------+-------+---------------+
 ; Clock ; Slack ; End Point TNS ;
 +-------+-------+---------------+
-; clock ; 0.127 ; 0.000         ;
+; clock ; 0.192 ; 0.000         ;
 +-------+-------+---------------+
 
 
@@ -391,32 +367,32 @@ No paths to report.
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack ; From Node               ; To Node                 ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
-; 0.127 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; -0.001     ; 0.904      ;
-; 0.127 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; -0.001     ; 0.904      ;
-; 0.127 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; -0.001     ; 0.904      ;
-; 0.169 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.863      ;
-; 0.180 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 0.852      ;
-; 0.235 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.797      ;
-; 0.253 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.779      ;
-; 0.313 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 0.719      ;
-; 0.321 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.711      ;
-; 0.324 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.708      ;
-; 0.335 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.697      ;
-; 0.338 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.694      ;
+; 0.192 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.840      ;
+; 0.192 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.840      ;
+; 0.192 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.840      ;
+; 0.265 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.000      ; 0.767      ;
+; 0.295 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.737      ;
+; 0.330 ; count[0]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.702      ;
+; 0.334 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; -0.002     ; 0.696      ;
+; 0.343 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.002      ; 0.691      ;
 ; 0.352 ; count[1]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.680      ;
-; 0.373 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.659      ;
-; 0.387 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.645      ;
+; 0.365 ; count[0]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.667      ;
+; 0.382 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 1.000        ; 0.002      ; 0.652      ;
+; 0.384 ; count[2]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.648      ;
+; 0.385 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.002      ; 0.649      ;
 ; 0.387 ; count[1]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.645      ;
-; 0.395 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.637      ;
-; 0.397 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.635      ;
-; 0.397 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.635      ;
-; 0.447 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; -0.001     ; 0.584      ;
-; 0.462 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 1.000        ; 0.000      ; 0.570      ;
-; 0.466 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.566      ;
-; 0.513 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.519      ;
+; 0.389 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; -0.002     ; 0.641      ;
+; 0.411 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.621      ;
+; 0.414 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.618      ;
+; 0.428 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 1.000        ; -0.002     ; 0.602      ;
+; 0.441 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 1.000        ; -0.002     ; 0.589      ;
+; 0.460 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 1.000        ; 0.000      ; 0.572      ;
+; 0.505 ; count[0]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.527      ;
+; 0.505 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 1.000        ; 0.000      ; 0.527      ;
+; 0.522 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.510      ;
 ; 0.522 ; count[1]                ; count[1]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.510      ;
-; 0.524 ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.508      ;
-; 0.525 ; count[2]                ; count[2]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.507      ;
+; 0.629 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.403      ;
+; 0.638 ; count[3]                ; count[3]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.394      ;
 ; 0.665 ; count[0]                ; count[0]                ; clock        ; clock       ; 1.000        ; 0.000      ; 0.367      ;
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 
@@ -428,31 +404,31 @@ No paths to report.
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 ; 0.215 ; EA.Decolando            ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; count[0]                ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.367      ;
-; 0.355 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.507      ;
-; 0.356 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.508      ;
+; 0.242 ; count[3]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.394      ;
+; 0.251 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.403      ;
 ; 0.358 ; count[1]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.510      ;
-; 0.367 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.519      ;
-; 0.378 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.530      ;
-; 0.397 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.549      ;
-; 0.414 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.566      ;
-; 0.418 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.570      ;
-; 0.433 ; EA.AeroportoFuncionando ; count[0]                ; clock        ; clock       ; 0.000        ; -0.001     ; 0.584      ;
-; 0.483 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.635      ;
+; 0.358 ; count[2]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.510      ;
+; 0.375 ; EA.Espera               ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.527      ;
+; 0.375 ; count[0]                ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.527      ;
+; 0.420 ; EA.AeroportoFuncionando ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.572      ;
+; 0.439 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; -0.002     ; 0.589      ;
+; 0.443 ; EA.Espera               ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.002      ; 0.597      ;
+; 0.452 ; EA.Pousando             ; EA.Espera               ; clock        ; clock       ; 0.000        ; -0.002     ; 0.602      ;
+; 0.466 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.618      ;
+; 0.469 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.621      ;
+; 0.491 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; -0.002     ; 0.641      ;
 ; 0.493 ; count[1]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.645      ;
-; 0.493 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.645      ;
-; 0.507 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.659      ;
+; 0.495 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.002      ; 0.649      ;
+; 0.496 ; count[2]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.648      ;
+; 0.498 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.002      ; 0.652      ;
+; 0.515 ; count[0]                ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.667      ;
 ; 0.528 ; count[1]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.680      ;
-; 0.542 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.694      ;
-; 0.545 ; EA.Espera               ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.697      ;
-; 0.556 ; EA.AeroportoFuncionando ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.708      ;
-; 0.559 ; EA.Decolando            ; EA.Espera               ; clock        ; clock       ; 0.000        ; 0.000      ; 0.711      ;
-; 0.584 ; EA.Pousando             ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.736      ;
-; 0.627 ; EA.AeroportoFuncionando ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.779      ;
-; 0.650 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; 0.000      ; 0.802      ;
-; 0.700 ; EA.AeroportoFuncionando ; EA.Decolando            ; clock        ; clock       ; 0.000        ; 0.000      ; 0.852      ;
-; 0.753 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; -0.001     ; 0.904      ;
-; 0.753 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; -0.001     ; 0.904      ;
-; 0.753 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; -0.001     ; 0.904      ;
+; 0.546 ; EA.Decolando            ; EA.AeroportoFuncionando ; clock        ; clock       ; 0.000        ; -0.002     ; 0.696      ;
+; 0.550 ; count[0]                ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.702      ;
+; 0.585 ; EA.Pousando             ; EA.Pousando             ; clock        ; clock       ; 0.000        ; 0.000      ; 0.737      ;
+; 0.688 ; EA.AeroportoFuncionando ; count[1]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.840      ;
+; 0.688 ; EA.AeroportoFuncionando ; count[2]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.840      ;
+; 0.688 ; EA.AeroportoFuncionando ; count[3]                ; clock        ; clock       ; 0.000        ; 0.000      ; 0.840      ;
 +-------+-------------------------+-------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -508,13 +484,13 @@ No paths to report.
 +------------+------------+-------+-------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +------------+------------+-------+-------+------------+-----------------+
-; decolar    ; clock      ; 2.749 ; 2.749 ; Rise       ; clock           ;
-; imprevisto ; clock      ; 2.571 ; 2.571 ; Rise       ; clock           ;
-; peso       ; clock      ; 2.302 ; 2.302 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; 2.634 ; 2.634 ; Rise       ; clock           ;
-; pousar     ; clock      ; 2.146 ; 2.146 ; Rise       ; clock           ;
-; tempestade ; clock      ; 2.376 ; 2.376 ; Rise       ; clock           ;
-; tempo      ; clock      ; 2.581 ; 2.581 ; Rise       ; clock           ;
+; decolar    ; clock      ; 2.618 ; 2.618 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 2.707 ; 2.707 ; Rise       ; clock           ;
+; peso       ; clock      ; 2.507 ; 2.507 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 2.553 ; 2.553 ; Rise       ; clock           ;
+; pousar     ; clock      ; 2.363 ; 2.363 ; Rise       ; clock           ;
+; tempestade ; clock      ; 2.113 ; 2.113 ; Rise       ; clock           ;
+; tempo      ; clock      ; 2.181 ; 2.181 ; Rise       ; clock           ;
 +------------+------------+-------+-------+------------+-----------------+
 
 
@@ -523,13 +499,13 @@ No paths to report.
 +------------+------------+--------+--------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +------------+------------+--------+--------+------------+-----------------+
-; decolar    ; clock      ; -2.109 ; -2.109 ; Rise       ; clock           ;
-; imprevisto ; clock      ; -2.017 ; -2.017 ; Rise       ; clock           ;
-; peso       ; clock      ; -2.047 ; -2.047 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; -2.080 ; -2.080 ; Rise       ; clock           ;
-; pousar     ; clock      ; -1.942 ; -1.942 ; Rise       ; clock           ;
-; tempestade ; clock      ; -1.804 ; -1.804 ; Rise       ; clock           ;
-; tempo      ; clock      ; -1.948 ; -1.948 ; Rise       ; clock           ;
+; decolar    ; clock      ; -1.891 ; -1.891 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -2.111 ; -2.111 ; Rise       ; clock           ;
+; peso       ; clock      ; -1.911 ; -1.911 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -1.957 ; -1.957 ; Rise       ; clock           ;
+; pousar     ; clock      ; -1.812 ; -1.812 ; Rise       ; clock           ;
+; tempestade ; clock      ; -1.673 ; -1.673 ; Rise       ; clock           ;
+; tempo      ; clock      ; -1.981 ; -1.981 ; Rise       ; clock           ;
 +------------+------------+--------+--------+------------+-----------------+
 
 
@@ -538,11 +514,11 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 3.740 ; 3.740 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 3.740 ; 3.740 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.646 ; 3.646 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.618 ; 3.618 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.617 ; 3.617 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
 
 
@@ -551,30 +527,12 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 3.740 ; 3.740 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 3.617 ; 3.617 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.646 ; 3.646 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.618 ; 3.618 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.617 ; 3.617 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
-
-
-+----------------------------------------------------+
-; Propagation Delay                                  ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 5.001 ;    ;    ; 5.001 ;
-+------------+-------------+-------+----+----+-------+
-
-
-+----------------------------------------------------+
-; Minimum Propagation Delay                          ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 5.001 ;    ;    ; 5.001 ;
-+------------+-------------+-------+----+----+-------+
 
 
 +------------------------------------------------------------------------------+
@@ -582,10 +540,10 @@ No paths to report.
 +------------------+--------+-------+----------+---------+---------------------+
 ; Clock            ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------+--------+-------+----------+---------+---------------------+
-; Worst-case Slack ; -0.867 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-;  clock           ; -0.867 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-; Design-wide TNS  ; -5.18  ; 0.0   ; 0.0      ; 0.0     ; -9.38               ;
-;  clock           ; -5.180 ; 0.000 ; N/A      ; N/A     ; -9.380              ;
+; Worst-case Slack ; -0.596 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  clock           ; -0.596 ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; -3.675 ; 0.0   ; 0.0      ; 0.0     ; -9.38               ;
+;  clock           ; -3.675 ; 0.000 ; N/A      ; N/A     ; -9.380              ;
 +------------------+--------+-------+----------+---------+---------------------+
 
 
@@ -594,13 +552,13 @@ No paths to report.
 +------------+------------+-------+-------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +------------+------------+-------+-------+------------+-----------------+
-; decolar    ; clock      ; 5.337 ; 5.337 ; Rise       ; clock           ;
-; imprevisto ; clock      ; 4.943 ; 4.943 ; Rise       ; clock           ;
-; peso       ; clock      ; 4.528 ; 4.528 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; 5.079 ; 5.079 ; Rise       ; clock           ;
-; pousar     ; clock      ; 4.151 ; 4.151 ; Rise       ; clock           ;
-; tempestade ; clock      ; 4.695 ; 4.695 ; Rise       ; clock           ;
-; tempo      ; clock      ; 5.014 ; 5.014 ; Rise       ; clock           ;
+; decolar    ; clock      ; 5.041 ; 5.041 ; Rise       ; clock           ;
+; imprevisto ; clock      ; 5.165 ; 5.165 ; Rise       ; clock           ;
+; peso       ; clock      ; 4.745 ; 4.745 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; 4.840 ; 4.840 ; Rise       ; clock           ;
+; pousar     ; clock      ; 4.714 ; 4.714 ; Rise       ; clock           ;
+; tempestade ; clock      ; 4.036 ; 4.036 ; Rise       ; clock           ;
+; tempo      ; clock      ; 4.228 ; 4.228 ; Rise       ; clock           ;
 +------------+------------+-------+-------+------------+-----------------+
 
 
@@ -609,13 +567,13 @@ No paths to report.
 +------------+------------+--------+--------+------------+-----------------+
 ; Data Port  ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +------------+------------+--------+--------+------------+-----------------+
-; decolar    ; clock      ; -2.109 ; -2.109 ; Rise       ; clock           ;
-; imprevisto ; clock      ; -2.017 ; -2.017 ; Rise       ; clock           ;
-; peso       ; clock      ; -2.047 ; -2.047 ; Rise       ; clock           ;
-; pistaLivre ; clock      ; -2.080 ; -2.080 ; Rise       ; clock           ;
-; pousar     ; clock      ; -1.942 ; -1.942 ; Rise       ; clock           ;
-; tempestade ; clock      ; -1.804 ; -1.804 ; Rise       ; clock           ;
-; tempo      ; clock      ; -1.948 ; -1.948 ; Rise       ; clock           ;
+; decolar    ; clock      ; -1.891 ; -1.891 ; Rise       ; clock           ;
+; imprevisto ; clock      ; -2.111 ; -2.111 ; Rise       ; clock           ;
+; peso       ; clock      ; -1.911 ; -1.911 ; Rise       ; clock           ;
+; pistaLivre ; clock      ; -1.957 ; -1.957 ; Rise       ; clock           ;
+; pousar     ; clock      ; -1.812 ; -1.812 ; Rise       ; clock           ;
+; tempestade ; clock      ; -1.673 ; -1.673 ; Rise       ; clock           ;
+; tempo      ; clock      ; -1.981 ; -1.981 ; Rise       ; clock           ;
 +------------+------------+--------+--------+------------+-----------------+
 
 
@@ -624,11 +582,11 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 6.581 ; 6.581 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 6.388 ; 6.388 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 6.386 ; 6.386 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 6.581 ; 6.581 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 6.368 ; 6.368 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 6.368 ; 6.368 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 6.367 ; 6.367 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 6.339 ; 6.339 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
 
 
@@ -637,30 +595,12 @@ No paths to report.
 +--------------+------------+-------+-------+------------+-----------------+
 ; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +--------------+------------+-------+-------+------------+-----------------+
-; contador[*]  ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
-;  contador[0] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[1] ; clock      ; 3.668 ; 3.668 ; Rise       ; clock           ;
-;  contador[2] ; clock      ; 3.740 ; 3.740 ; Rise       ; clock           ;
-;  contador[3] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+; contador[*]  ; clock      ; 3.617 ; 3.617 ; Rise       ; clock           ;
+;  contador[0] ; clock      ; 3.647 ; 3.647 ; Rise       ; clock           ;
+;  contador[1] ; clock      ; 3.646 ; 3.646 ; Rise       ; clock           ;
+;  contador[2] ; clock      ; 3.618 ; 3.618 ; Rise       ; clock           ;
+;  contador[3] ; clock      ; 3.617 ; 3.617 ; Rise       ; clock           ;
 +--------------+------------+-------+-------+------------+-----------------+
-
-
-+----------------------------------------------------+
-; Progagation Delay                                  ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 8.790 ;    ;    ; 8.790 ;
-+------------+-------------+-------+----+----+-------+
-
-
-+----------------------------------------------------+
-; Minimum Progagation Delay                          ;
-+------------+-------------+-------+----+----+-------+
-; Input Port ; Output Port ; RR    ; RF ; FR ; FF    ;
-+------------+-------------+-------+----+----+-------+
-; tempo      ; alarme      ; 5.001 ;    ;    ; 5.001 ;
-+------------+-------------+-------+----+----+-------+
 
 
 +-------------------------------------------------------------------+
@@ -668,7 +608,7 @@ No paths to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clock      ; clock    ; 32       ; 0        ; 0        ; 0        ;
+; clock      ; clock    ; 29       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -678,7 +618,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clock      ; clock    ; 32       ; 0        ; 0        ; 0        ;
+; clock      ; clock    ; 29       ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -703,9 +643,9 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 7     ; 7    ;
-; Unconstrained Input Port Paths  ; 45    ; 45   ;
-; Unconstrained Output Ports      ; 5     ; 5    ;
-; Unconstrained Output Port Paths ; 5     ; 5    ;
+; Unconstrained Input Port Paths  ; 43    ; 43   ;
+; Unconstrained Output Ports      ; 4     ; 4    ;
+; Unconstrained Output Port Paths ; 4     ; 4    ;
 +---------------------------------+-------+------+
 
 
@@ -715,7 +655,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Oct 20 10:38:22 2020
+    Info: Processing started: Wed Oct 21 23:44:09 2020
 Info: Command: quartus_sta aeroporto -c aeroporto
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -728,10 +668,10 @@ Info (332105): Deriving Clocks
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow Model
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -0.867
+Info (332146): Worst-case setup slack is -0.596
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -0.867        -5.180 clock 
+    Info (332119):    -0.596        -3.675 clock 
 Info (332146): Worst-case hold slack is 0.391
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -744,10 +684,10 @@ Info (332146): Worst-case minimum pulse width slack is -1.380
     Info (332119):    -1.380        -9.380 clock 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
-Info (332146): Worst-case setup slack is 0.127
+Info (332146): Worst-case setup slack is 0.192
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):     0.127         0.000 clock 
+    Info (332119):     0.192         0.000 clock 
 Info (332146): Worst-case hold slack is 0.215
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -763,9 +703,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4544 megabytes
-    Info: Processing ended: Tue Oct 20 10:38:26 2020
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Peak virtual memory: 4521 megabytes
+    Info: Processing ended: Wed Oct 21 23:44:10 2020
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 

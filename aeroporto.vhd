@@ -10,17 +10,17 @@ entity aeroporto is
 port(
 		listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
 		listaPouso		:	out std_logic_vector (3 downto 0);
+		duracao			:  in time;
 		tempestade		:	in std_logic;
 		peso				: 	in std_logic;
 		imprevisto		:	in std_logic;
-		tempo				:  in std_logic; --Não sei se de fato o tempo será booleano, minha ideia é fazer igual ao flag_write
-		--que tá no código do tb_funcao da pratica 10
+		tempo				:  in std_logic;
 		decolar 			:  in std_logic;
 		pousar 			:  in std_logic;
 		pistaLivre		:  in std_logic;
 		clock 			: in std_logic;
 		alarme 			: out std_logic;
-		tempo_decorrido : out std_logic;	
+		tempo_decorrido: out std_logic;	
 		contador			: out integer range 0 to 10
 );
 
@@ -51,7 +51,7 @@ begin
 	elsif (clock'event and clock = '1') then
 		case EA is		
 			when AeroportoFuncionando => 
-				if (decolar = '1' and imprevisto = '0' and pistaLivre = '1' and tempo = '0') then -- Somente quando tiver aviao p/ decolar,
+				if (decolar = '1' and imprevisto = '0' and pistaLivre = '1' and peso = '0') then -- Somente quando tiver aviao p/ decolar,
 			--	não houver imprevistos e a pista estiver livre ele poderá decolar
 					EA <= Decolando;
 					count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
@@ -87,7 +87,7 @@ begin
 				end if;
 		end case;
 	end if;
-	alarme <= tempo; -- o alarme deve ser igual ao tempo, pq enquanto ele for 1 tem aviao decolando ou pousando
+	--alarme <= tempo; -- o alarme deve ser igual ao tempo, pq enquanto ele for 1 tem aviao decolando ou pousando
 						  -- e quando o tempo for 0 nao tem nada acontecendo
 	contador <= count; 
 	
