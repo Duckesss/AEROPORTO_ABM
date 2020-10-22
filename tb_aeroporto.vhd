@@ -13,7 +13,7 @@ architecture testesucesso of tb_aeroporto is
 component aeroporto is
 
 	port (	listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
-				listaPouso		:	out std_logic_vector (3 downto 0);
+				listaPouso		:	in std_logic_vector (3 downto 0);
 				duracao			:  in time;
 				tempestade		:	in std_logic;
 				peso				: 	in std_logic;
@@ -43,7 +43,8 @@ end component;
 	signal flag_write	: std_logic := '0';
 	signal t1, t2, t3, t4			: time; -- t1 = duracao estado AF, t2 = duracao decola, t3 = duracao pouso
 	-- e t4 = duracao espera
-	signal p, d, e, af : std_logic := '0';
+	signal p, d, e, af : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
+	signal aux : time := 1 ns;		-- sinal auxiliar para contar o tempo dos horários de transição
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
@@ -54,6 +55,10 @@ end component;
 	constant pousa 	: string (1 to 16) := "Tempo pousando: ";
 	constant aeroportoFunciona 	: string (1 to 10) := "Tempo AE: ";
 	constant espera 	: string (1 to 14) := "Tempo espera: ";
+	constant t_transicao : string (1 to 18) := "     Transição: ";
+	constant space1	: string (1 to 1) := " ";
+	constant space2 	: string (1 to 8) := "        "; 
+	constant space3	: string (1 to 3) := "   ";
 
 	-- Clock period definitions
    constant period     : time := 20 ns;
@@ -178,23 +183,21 @@ end process read_inputs_data_in;
 ------------------------------------------------------------------------------------
 ----------------- processo para ler os dados do arquivo aviao_pousa.txt
 ------------------------------------------------------------------------------------
---read_inputs_data_in2 : process
-		--variable linea : line;
-		--variable input : std_logic_vector(3 downto 0);
-	--begin
-	--wait for 0.5 ns;
-	--while not endfile(inputs_data_in2) loop
-		--if (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then 
-		-- se tempo = 0 (sem aviao decolando ou pousando) e tem aviao p/ decolar e o peso for aceitavel
-		-- e a pista estiver livre, então se incia a leitura do arquivo quando isso acontece
-			--readline(inputs_data_in,linea);
-			--read(linea,input);
-			--listaPouso <= input;
-		--end if;
-		--wait for period;
-	--end loop;
+read_inputs_data_in2 : process
+		variable linea : line;
+		variable input2 : std_logic_vector(3 downto 0);
+	begin
+	wait for 10 ns;	-- não sei do pq desse tempo mas foi o unico que funcionou
+	while not endfile(inputs_data_in2) loop
+		if (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempo = '0') then 
+			readline(inputs_data_in2,linea);
+			read(linea,input2);
+			listaPouso <= input2;
+		end if;
+		wait for 5 ns; -- mesma com coisa com esse aqui. Ps.: A leitura desse arquivo e do de decolagem
+	end loop;			-- estão meio zuados, se der pra arrumar isso vai ser lindo.
 	--wait;
---end process read_inputs_data_in2;
+end process read_inputs_data_in2;
 
 ------------------------------------------------------------------------------------
 ----------------- processo para ler os dados do arquivo duracao_estado.txt
@@ -208,17 +211,17 @@ dura_estado : process
 		if (flag_write = '1') then
 			readline(tempo_estado, line1);
 			read(line1, t);
-			t1 <= t;
+			t1 <= t;		-- t1 = estado aeroporto funcionando
 			duracao <= t;
 			readline(tempo_estado, line2);
 			read(line2, t);
-			t2 <= t;
+			t2 <= t;		-- t2 = estado decolando
 			readline(tempo_estado, line3);
 			read(line3, t);
-			t3 <= t;
+			t3 <= t;		-- t3 = estado pousando
 			readline(tempo_estado, line4);
 			read(line4, t);
-			t4 <= t;
+			t4 <= t;		-- t4 = estado espera
 		end if;
 		wait for period;
 	end loop;
@@ -238,24 +241,39 @@ escreve_output : process
 	wait for 1 ns;
 		if (d = '1') then
 			write (linea, decola);
-			write (linea, t2);
+			write (linea, t2);			
+			write (linea, t_transicao);
+			write (linea, aux);
 			writeline (outputs1, linea);	
 			wait for 10 ns;
+			aux <= aux + 10 ns;
 		elsif (p = '1') then
 			write (linea, pousa);
 			write (linea, t3);
+			write (linea, space1);
+			write (linea, t_transicao);
+			write (linea, aux);
 			writeline (outputs1, linea);
 			wait for 30 ns;
+			aux <= aux + 30 ns;
 		elsif (af = '1') then
 			write (linea, aeroportoFunciona);
 			write (linea, t1);
+			write (linea, space2);
+			write (linea, t_transicao);
+			write (linea, aux);
 			writeline (outputs1, linea);
 			wait for 6 ns;
+			aux <= aux + 6 ns;
 		elsif (e = '1') then
 			write (linea, espera);
 			write (linea, t4);
+			write (linea, space3);
+			write (linea, t_transicao);
+			write (linea, aux);
 			writeline (outputs1, linea);
 			wait for 20 ns;
+			aux <= aux + 20 ns;
 		end if;
 	end if;
 	end loop;

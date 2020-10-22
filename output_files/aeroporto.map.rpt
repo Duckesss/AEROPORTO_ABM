@@ -1,5 +1,5 @@
 Analysis & Synthesis report for aeroporto
-Thu Oct 22 01:28:31 2020
+Thu Oct 22 02:11:13 2020
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -44,7 +44,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Oct 22 01:28:31 2020           ;
+; Analysis & Synthesis Status        ; Successful - Thu Oct 22 02:11:13 2020           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; aeroporto                                       ;
 ; Top-level Entity Name              ; aeroporto                                       ;
@@ -269,7 +269,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Oct 22 01:28:28 2020
+    Info: Processing started: Thu Oct 22 02:11:10 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off aeroporto -c aeroporto
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file aeroporto.vhd
@@ -279,22 +279,21 @@ Info (12021): Found 2 design units, including 1 entities, in source file tb_aero
     Info (12022): Found design unit 1: tb_aeroporto-testesucesso
     Info (12023): Found entity 1: tb_aeroporto
 Info (12127): Elaborating entity "aeroporto" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at aeroporto.vhd(12): used implicit default value for signal "listaPouso" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at aeroporto.vhd(23): used implicit default value for signal "tempo_decorrido" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "listaPouso[0]" is stuck at GND
-    Warning (13410): Pin "listaPouso[1]" is stuck at GND
-    Warning (13410): Pin "listaPouso[2]" is stuck at GND
-    Warning (13410): Pin "listaPouso[3]" is stuck at GND
     Warning (13410): Pin "tempo_decorrido" is stuck at GND
 Info (17049): 28 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 69 input pin(s) that do not drive logic
+Warning (21074): Design contains 73 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "listaDecolagem[0]"
     Warning (15610): No output dependent on input pin "listaDecolagem[1]"
     Warning (15610): No output dependent on input pin "listaDecolagem[2]"
     Warning (15610): No output dependent on input pin "listaDecolagem[3]"
+    Warning (15610): No output dependent on input pin "listaPouso[0]"
+    Warning (15610): No output dependent on input pin "listaPouso[1]"
+    Warning (15610): No output dependent on input pin "listaPouso[2]"
+    Warning (15610): No output dependent on input pin "listaPouso[3]"
     Warning (15610): No output dependent on input pin "duracao[0]"
     Warning (15610): No output dependent on input pin "duracao[1]"
     Warning (15610): No output dependent on input pin "duracao[2]"
@@ -361,12 +360,12 @@ Warning (21074): Design contains 69 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "duracao[63]"
     Warning (15610): No output dependent on input pin "alarme"
 Info (21057): Implemented 104 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 77 input pins
-    Info (21059): Implemented 9 output pins
+    Info (21058): Implemented 81 input pins
+    Info (21059): Implemented 5 output pins
     Info (21061): Implemented 18 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 79 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 78 warnings
     Info: Peak virtual memory: 4626 megabytes
-    Info: Processing ended: Thu Oct 22 01:28:31 2020
+    Info: Processing ended: Thu Oct 22 02:11:13 2020
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 

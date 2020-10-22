@@ -9,7 +9,7 @@ use std.textio.all;
 entity aeroporto is
 port(
 		listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
-		listaPouso		:	out std_logic_vector (3 downto 0);
+		listaPouso		:	in std_logic_vector (3 downto 0);
 		duracao			:  in time;
 		tempestade		:	in std_logic;
 		peso				: 	in std_logic;
@@ -42,7 +42,7 @@ architecture arch of aeroporto is
 --	cancelamento de pouso ou decolagem por tempestade)
 	
 begin
-	process(clock, EA, pousar, decolar, tempo, imprevisto, pistaLivre, listaDecolagem) -- Toda vez que o clock ou o estado mudar o process deve ser checado
+	process(clock, EA, pousar, decolar, tempo, imprevisto, peso, tempestade, pistaLivre, listaDecolagem, listaPouso) -- Toda vez que o clock ou o estado mudar o process deve ser checado
 	variable count : integer := 0;
 		--variavel tempo é especial e vai ter que ter uma funcao p/ habilitá-la com 1 ou 0
 	begin
