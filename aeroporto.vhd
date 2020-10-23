@@ -41,7 +41,7 @@ architecture arch of aeroporto is
 	
 begin
 	process(clock, EA, pousar, decolar, imprevisto, peso, tempestade, pistaLivre) -- Toda vez que o clock ou o estado mudar o process deve ser checado
-	variable count : integer := 0;
+	--variable count : integer := 0;
 		--variavel tempo Ã© especial e vai ter que ter uma funcao p/ habilitÃ¡-la com 1 ou 0
 	begin
 	if (pousar = '0' and decolar = '0') then -- enquanto nÃ£o hÃ¡ trÃ¡fego o estado pernece em AF
@@ -54,7 +54,7 @@ begin
 					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, nÃ£o?
 					EA <= AeroportoFuncionando;
 				elsif (decolar = '1') then -- Somente quando tiver aviao p/ decolar,
-					count := count + 1;
+					--count := count + 1;
 					EA <= Decolando;
 					--count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
 					-- o count nÃ£o esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
