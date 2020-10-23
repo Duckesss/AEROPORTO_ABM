@@ -24,7 +24,7 @@ port(
 
 
 -------------------------------------------------------------------------------------
-------------------------   DECLARAÇÃO DE ATRIBUTOS    -------------------------------
+------------------------   DECLARAÃ‡ÃƒO DE ATRIBUTOS    -------------------------------
 -------------------------------------------------------------------------------------
 --attribute temp_deco_Tempestade : std_logic;
 --attribute temp_deco_Tempestade of tempestade : signal is tempestade(tempestade'last_event);
@@ -41,25 +41,25 @@ architecture arch of aeroporto is
 	
 begin
 	process(clock, EA, pousar, decolar, imprevisto, peso, tempestade, pistaLivre) -- Toda vez que o clock ou o estado mudar o process deve ser checado
-	--variable count : integer := 0;
-		--variavel tempo é especial e vai ter que ter uma funcao p/ habilitá-la com 1 ou 0
+	variable count : integer := 0;
+		--variavel tempo Ã© especial e vai ter que ter uma funcao p/ habilitÃ¡-la com 1 ou 0
 	begin
-	if (pousar = '0' and decolar = '0') then -- enquanto não há tráfego o estado pernece em AF
+	if (pousar = '0' and decolar = '0') then -- enquanto nÃ£o hÃ¡ trÃ¡fego o estado pernece em AF
 		EA <= AeroportoFuncionando;
 	elsif (clock'event and clock = '1') then
 		case EA is		
 			when AeroportoFuncionando => 
 				-- esse if aqui em cima faz nao ter que ficar repetindo pistaLivre = '1' and peso = '0' nas outras condicoes
-				if(pistaLivre = '0' or peso = '1' and tempestade = '0') then --	não houver imprevistos e a pista estiver livre ele poderá decolar
-					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, não?
+				if(pistaLivre = '0' or peso = '1' or tempestade = '0') then --	nÃ£o houver imprevistos e a pista estiver livre ele poderÃ¡ decolar
+					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, nÃ£o?
 					EA <= AeroportoFuncionando;
 				elsif (decolar = '1') then -- Somente quando tiver aviao p/ decolar,
 					count := count + 1;
 					EA <= Decolando;
 					--count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
-					-- o count não esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
-					--Não faz sentido por ele aqui, pq a FSM irá entrar aqui várias vezes, acho que o correto é estar
-					--na transição do fim do pouso ou decolagem
+					-- o count nÃ£o esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
+					--NÃ£o faz sentido por ele aqui, pq a FSM irÃ¡ entrar aqui vÃ¡rias vezes, acho que o correto Ã© estar
+					--na transiÃ§Ã£o do fim do pouso ou decolagem
 				elsif (pousar = '1' and imprevisto = '0') then
 					EA <= Pousando;
 				elsif (tempestade = '1') then
@@ -69,7 +69,7 @@ begin
 			when Decolando =>
 				if (tempestade = '1') then
 					EA <= Espera;
-				elsif (tempestade = '0') then -- alterei aqui e tirei a variavel tempo como condição
+				elsif (tempestade = '0') then -- alterei aqui e tirei a variavel tempo como condiÃ§Ã£o
 					EA <= AeroportoFuncionando;
 				end if;
 				
