@@ -1,1 +1,11 @@
-*.flock
+#ignore everything
+*
+
+# but not these files
+!.gitignore
+*.qpf
+*.qsf
+*.vhd
+*.txt
+*.md
+*.tcl
