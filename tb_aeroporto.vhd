@@ -14,7 +14,6 @@ component aeroporto is
 
 	port (	listaDecolagem	:	in std_logic_vector (3 downto 0);	--Coloquei apenas para ter uma base de vetor de avioes, acho que deviamos usar o tempo que eles querem decolar ou pousar para definir a prioridade
 				listaPouso		:	in std_logic_vector (3 downto 0);
-				duracao			:  in time;
 				tempestade		:	in std_logic;
 				peso				: 	in std_logic;
 				imprevisto		:	in std_logic;
@@ -22,9 +21,7 @@ component aeroporto is
 				decolar 			:  in std_logic;
 				pousar 			:  in std_logic;
 				pistaLivre		:  in std_logic;
-				contador			: out integer range 0 to 10;
 				alarme			: in std_logic;
-				tempo_decorrido : out std_logic;
 				clock 			: in std_logic);
 end component;
 
@@ -34,26 +31,39 @@ end component;
 	signal Imprevisto, Decolar		: std_logic;
 	signal Pousar, PistaLivre 		: std_logic;
 	signal clk, Alarme            : std_logic;
-	signal Temp_Decorrido			: std_logic;
-	signal contador 					: integer;
-	signal Duracao						: time;
 
+	-- Sinais para fazer leitura e escrita nos arquivos
 	signal read_data_in	: std_logic := '0';
 	signal read_data_in2	: std_logic := '0';
 	signal flag_write	: std_logic := '0';
+	
+	-- Sinais para fazer controle do tempo de diferentes estados da fsm
 	signal t1, t2, t3, t4			: time; -- t1 = duracao estado AF, t2 = duracao decola, t3 = duracao pouso
 	-- e t4 = duracao espera
+	signal t_pouso, t_decola, t_peso, t_pista : time; -- tempo de subida e descida de cada sinal
+	signal t_tempestade, t_imprevisto : time; -- tempo de subida e descida de cada sinal
+	
+	-- Sinais que definem se existe algum problema que afeta o funcionamento do aeroporto ou se está tudo certo
+	signal tudo_ok, p_tempestade, p_imprevisto : std_logic_vector (1 downto 0); -- tudo_ok = segue o baile,
+	--p_tempestade = problema de tempestade, p_imprevisto = problema de imprevisto
+	
+	-- Sinais para saber em qual estado a fsm está
 	signal p, d, e, af : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
-	signal aux : time := 1 ns;		-- sinal auxiliar para contar o tempo dos horários de transição
+	
+	-- Sinal auxiliar
+	signal aux : time := 2 ns;		-- sinal auxiliar para contar o tempo dos horários de transição, ele é igual
+											-- a 2 ns, pois é o tempo de atraso para começar o primeiro estado
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
 	file tempo_estado    : text open read_mode is "duracao_estado.txt";
+	file tempo_sinal		: text open read_mode is "tempo_sinais.txt";
+	file def_problema		: text open read_mode is "define_problema.txt";
 	file outputs1			: text open write_mode is "saida1.txt";
 	
 	constant decola 	: string (1 to 17) := "Tempo decolando: ";
 	constant pousa 	: string (1 to 16) := "Tempo pousando: ";
-	constant aeroportoFunciona 	: string (1 to 10) := "Tempo AE: ";
+	constant aeroportoFunciona 	: string (1 to 10) := "Tempo AF: ";
 	constant espera 	: string (1 to 14) := "Tempo espera: ";
 	constant t_transicao : string (1 to 18) := "     Transição: ";
 	constant space1	: string (1 to 1) := " ";
@@ -78,9 +88,6 @@ DUT : aeroporto
 		pousar=>Pousar,
 		pistaLivre=>PistaLivre,
 		alarme=>Alarme,
-		--tempo_decorrido => Temp_Decorrido,
-		duracao=>Duracao,
-		contador=>contador,
 		clock=>clk
 	);
 
@@ -90,10 +97,10 @@ DUT : aeroporto
         process    -- clock process for clock
         begin		 -- fica 10 ns em alto e 10 ns em baixo
             clock_loop : loop
-                clk <= '0';
-                wait for 10 ns;
                 clk <= '1';
-                wait for 10 ns;
+                wait for 5 ns;
+                clk <= '0';
+                wait for 5 ns;
             end loop clock_loop;
         end process;
 
@@ -102,9 +109,9 @@ DUT : aeroporto
 ------------------------------------------------------------------------------------
 duracao_estado : process
 begin
-		wait for 0.5 ns; 			-- infelizmente precisa desse delay de 0.5 ns pq a leitura das condições abaixo não
+		wait for 1.5 ns; 			-- infelizmente precisa desse delay de 0.5 ns pq a leitura das condições abaixo não
 		for i in 1 to 100 loop	-- acontece imediatamente, é necessário add um tempo de espera
-		if (decolar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then
+		if (decolar = '1' and peso = '0' and pistaLivre = '1' and tempestade = '0') then
 			tempo <= '0';		-- entrar aqui significa que o aviao está decolando
 			alarme <= '1';
 			d <= '1';
@@ -115,7 +122,7 @@ begin
 			tempo <= '1';
 			alarme <= '1';
 			wait for (t2/2);	-- 5 ns, no total se passam 10 ns em cada decolagem
-		elsif (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1') then
+		elsif (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempestade = '0') then
 			tempo <= '0';		-- entrar aqui significa que o aviao está pousando
 			alarme <= '1';
 			p <= '1';
@@ -126,7 +133,7 @@ begin
 			tempo <= '1';
 			alarme <= '1';
 			wait for (t3/2);	-- 15 ns, no total se passam 30 ns em cada pouso
-		elsif ((imprevisto = '1' or peso = '1' or pistaLivre = '0') and tempestade = '0') then
+		elsif ((imprevisto = '1' or peso = '1' or pistaLivre = '0') and tempestade = '0') then --mudar
 			tempo <= '0';		-- entrar aqui significa que o aviao está no estado AF
 			alarme <= '0';
 			p <= '0';
@@ -166,11 +173,9 @@ read_inputs_data_in : process
 		variable linea : line;
 		variable input : std_logic_vector(3 downto 0);
 	begin
-	wait for 1.5 ns;
+	wait for 2.5 ns;
 	while not endfile(inputs_data_in) loop
-		if (decolar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempo = '0') then 
-		-- se tempo = 0 (sem aviao decolando ou pousando) e tem aviao p/ decolar e o peso for aceitavel
-		-- e a pista estiver livre, então se incia a leitura do arquivo quando isso acontece
+		if (decolar = '1' and peso = '0' and pistaLivre = '1' and tempestade = '0' and pousar = '0') then 
 			readline(inputs_data_in,linea);
 			read(linea,input);
 			listaDecolagem <= input;
@@ -187,9 +192,11 @@ read_inputs_data_in2 : process
 		variable linea : line;
 		variable input2 : std_logic_vector(3 downto 0);
 	begin
-	wait for 10 ns;	-- não sei do pq desse tempo mas foi o unico que funcionou
+	wait for 8 ns;	-- não sei do pq desse tempo mas foi o unico que funcionou
 	while not endfile(inputs_data_in2) loop
-		if (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempo = '0') then 
+		if (pousar = '1' and peso = '0' and imprevisto = '0' and pistaLivre = '1' and tempo = '0' 
+		and decolar = '0' and tempestade = '0') then
+			--wait for t2;
 			readline(inputs_data_in2,linea);
 			read(linea,input2);
 			listaPouso <= input2;
@@ -212,7 +219,6 @@ dura_estado : process
 			readline(tempo_estado, line1);
 			read(line1, t);
 			t1 <= t;		-- t1 = estado aeroporto funcionando
-			duracao <= t;
 			readline(tempo_estado, line2);
 			read(line2, t);
 			t2 <= t;		-- t2 = estado decolando
@@ -228,6 +234,63 @@ dura_estado : process
 	wait;
 end process dura_estado;
 
+------------------------------------------------------------------------------------
+----------------- processo para ler os dados do arquivo define_problema.txt
+------------------------------------------------------------------------------------
+gera_sinal : process
+	variable line1, line2, line3 : line;
+	variable vetor : std_logic_vector (1 downto 0);
+	begin
+	wait for 0.1 ns;
+	while not endfile(def_problema) loop
+		if (read_data_in2 = '1') then
+			readline(def_problema, line1);
+			read(line1, vetor);
+			tudo_ok <= vetor;
+			readline(def_problema, line2);
+			read(line2, vetor);
+			p_tempestade <= vetor;
+			readline(def_problema, line3);
+			read(line3, vetor);
+			p_imprevisto <= vetor;
+		end if;
+		wait for period;
+	end loop;
+	wait;
+end process gera_sinal;
+------------------------------------------------------------------------------------
+----------------- processo para ler os dados do arquivo tempo_sinais.txt
+------------------------------------------------------------------------------------
+problema : process
+	variable line1, line2, line3, line4, line5, line6 : line;
+	variable t : time;
+	begin
+	wait for 0.1 ns;
+	while not endfile(tempo_sinal) loop
+		if (read_data_in = '1') then
+			readline(tempo_sinal, line1);
+			read(line1, t);
+			t_decola <= t;
+			readline(tempo_sinal, line2);
+			read(line2, t);
+			t_pouso <= t;
+			readline(tempo_sinal, line3);
+			read(line3, t);
+			t_peso <= t;
+			readline(tempo_sinal, line4);
+			read(line4, t);
+			t_pista <= t;
+			readline(tempo_sinal, line5);
+			read(line5, t);
+			t_tempestade <= t;
+			readline(tempo_sinal, line6);
+			read(line6, t);
+			t_imprevisto <= t;
+		end if;
+		wait for period;
+	end loop;
+	wait;
+end process problema;
 ------------------------------------------------------------------------------------
 ------ processo para escrever os dados de saida no saida.txt
 ------------------------------------------------------------------------------------ 
@@ -245,8 +308,8 @@ escreve_output : process
 			write (linea, t_transicao);
 			write (linea, aux);
 			writeline (outputs1, linea);	
-			wait for 10 ns;
-			aux <= aux + 10 ns;
+			wait for t2;
+			aux <= aux + t2;
 		elsif (p = '1') then
 			write (linea, pousa);
 			write (linea, t3);
@@ -254,8 +317,8 @@ escreve_output : process
 			write (linea, t_transicao);
 			write (linea, aux);
 			writeline (outputs1, linea);
-			wait for 30 ns;
-			aux <= aux + 30 ns;
+			wait for t3;
+			aux <= aux + t3;
 		elsif (af = '1') then
 			write (linea, aeroportoFunciona);
 			write (linea, t1);
@@ -263,8 +326,8 @@ escreve_output : process
 			write (linea, t_transicao);
 			write (linea, aux);
 			writeline (outputs1, linea);
-			wait for 6 ns;
-			aux <= aux + 6 ns;
+			wait for t1;
+			aux <= aux + t1;
 		elsif (e = '1') then
 			write (linea, espera);
 			write (linea, t4);
@@ -272,8 +335,8 @@ escreve_output : process
 			write (linea, t_transicao);
 			write (linea, aux);
 			writeline (outputs1, linea);
-			wait for 20 ns;
-			aux <= aux + 20 ns;
+			wait for t4;
+			aux <= aux + t4;
 		end if;
 	end if;
 	end loop;
@@ -295,25 +358,21 @@ end process write_outputs;
 ------------------------------------------------------------------------------------
 tb_estimulo : process
 	begin
-		--wait for 5 ns;
 			read_data_in <= '1';
-			for i in 1 to 8 loop --1 a 8 pq é a qntd de elementos na lista de decolagem
+			for i in 1 to 6 loop --1 a 6 pq é a qntd de elementos na lista de tempo dos sinais
 				wait for 20 ns;
 			end loop;
 			read_data_in <= '0';
-		--wait;
-
+			
 END process tb_estimulo;
 
 tb_estimulo2 : process
 	begin
-		--wait for 5 ns;
 			read_data_in2 <= '1';
-			for i in 1 to 8 loop --1 a 8 pq é a qntd de elementos na lista de decolagem
+			for i in 1 to 3 loop --1 a 3 pq é a qntd de elementos na lista de problemas
 				wait for 20 ns;
 			end loop;
 			read_data_in2 <= '0';
-		--wait;
 
 END process tb_estimulo2;
 	
@@ -322,11 +381,12 @@ END process tb_estimulo2;
 ------------------------------------------------------------------------------------
 previsao_tempo : process
 	begin
+		wait for 0.5 ns;
 		tempestade_loop : loop
-			tempestade <= '1';
-			wait for 25 ns;
-		   tempestade <= '0';
-			wait for 25 ns;
+			tempestade <= '0';
+			wait for t_tempestade;
+		   tempestade <= '1';
+			wait for t_tempestade;
       end loop tempestade_loop;
 end process;
 
@@ -335,11 +395,12 @@ end process;
 --------------------------------------------------------------------------------------
 decolando : process  -- 15 ns em alto e 15 ns em baixo
 	begin
+	wait for 0.5 ns;
 		decola_loop : loop
 			decolar <= '1';
-			wait for 9 ns;
+			wait for t_decola;
 			decolar <= '0';
-			wait for 9 ns;
+			wait for t_decola;
       end loop decola_loop;
 end process;
 
@@ -348,11 +409,12 @@ end process;
 --------------------------------------------------------------------------------------
 quero_pousar : process  -- 15 ns em alto e 15 ns em baixo
 	begin
+		wait for 0.5 ns;
 		pousa_loop : loop
 			pousar <= '0';
-			wait for 9 ns;
+			wait for t_pouso;
 			pousar <= '1';
-			wait for 9 ns;
+			wait for t_pouso;
       end loop pousa_loop;
 end process;
 
@@ -361,11 +423,12 @@ end process;
 --------------------------------------------------------------------------------------
 sinal_peso : process -- 30 ns em alto e 30 ns em baixo
 	begin
+		wait for 0.5 ns;
 		peso_loop : loop
 			peso <= '0';
-			wait for 30 ns;
+			wait for t_peso;
 			peso <= '1';
-			wait for 30 ns;
+			wait for t_peso;
 		end loop peso_loop;
 end process;
 
@@ -374,11 +437,12 @@ end process;
 --------------------------------------------------------------------------------------
 sinal_imprevisto : process   --15 ns em baixo e 15 ns em alto
 	begin
+		wait for 0.5 ns;
 		imprevisto_loop : loop
 			imprevisto <= '0';
-			wait for 15 ns;
+			wait for t_imprevisto;
 			imprevisto <= '1';
-			wait for 15 ns;
+			wait for t_imprevisto;
 		end loop imprevisto_loop;
 end process;
 
@@ -387,11 +451,12 @@ end process;
 --------------------------------------------------------------------------------------
 sinal_pistaLivre : process   -- 15 ns em alto e 15 ns em baixo
 	begin
+		wait for 0.5 ns;
 		pista_loop : loop
 			pistaLivre <= '1';
-			wait for 15 ns;
+			wait for t_pista;
 			pistaLivre <= '0';
-			wait for 15 ns;
+			wait for t_pista;
 		end loop pista_loop;
 end process;
 
