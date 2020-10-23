@@ -51,11 +51,11 @@ begin
 	elsif (clock'event and clock = '1') then
 		case EA is		
 			when AeroportoFuncionando => 
-				if(pistaLivre = '0' or peso = '1') then 
+				-- esse if aqui em cima faz nao ter que ficar repetindo pistaLivre = '1' and peso = '0' nas outras condicoes
+				if(pistaLivre = '0' or peso = '1') then --	não houver imprevistos e a pista estiver livre ele poderá decolar
 					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, não?
 					EA <= AeroportoFuncionando;
 				elsif (decolar = '1') then -- Somente quando tiver aviao p/ decolar,
-			--	não houver imprevistos e a pista estiver livre ele poderá decolar
 					count := count + 1;
 					EA <= Decolando;
 					--count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
