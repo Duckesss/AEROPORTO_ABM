@@ -1,5 +1,5 @@
 Analysis & Synthesis report for aeroporto
-Thu Oct 22 16:33:16 2020
+Fri Oct 23 00:42:13 2020
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -16,8 +16,9 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   8. State Machine - |aeroporto|EA
   9. Registers Removed During Synthesis
  10. General Register Statistics
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Elapsed Time Per Partition
+ 13. Analysis & Synthesis Messages
 
 
 
@@ -43,16 +44,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Oct 22 16:33:16 2020           ;
+; Analysis & Synthesis Status        ; Successful - Fri Oct 23 00:42:13 2020           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; aeroporto                                       ;
 ; Top-level Entity Name              ; aeroporto                                       ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 18                                              ;
-;     Total combinational functions  ; 18                                              ;
-;     Dedicated logic registers      ; 8                                               ;
-; Total registers                    ; 8                                               ;
-; Total pins                         ; 86                                              ;
+; Total logic elements               ; 0                                               ;
+;     Total combinational functions  ; 0                                               ;
+;     Dedicated logic registers      ; 0                                               ;
+; Total registers                    ; 0                                               ;
+; Total pins                         ; 17                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -156,13 +157,13 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                           ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                    ; Library ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
-; aeroporto.vhd                    ; yes             ; User VHDL File  ; D:/Estudo/__UFMG/Semestre 3/Lab SD/Git-ProjetoFinal/AEROPORTO_ABM/aeroporto.vhd ;         ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                         ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                  ; Library ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
+; aeroporto.vhd                    ; yes             ; User VHDL File  ; C:/Users/Bibs/Downloads/ProjetoFinal/ProjetoFinal/AEROPORTO_ABM/aeroporto.vhd ;         ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -170,28 +171,23 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 18    ;
 ;                                             ;       ;
-; Total combinational functions               ; 18    ;
+; Total combinational functions               ; 0     ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 11    ;
-;     -- 3 input functions                    ; 2     ;
-;     -- <=2 input functions                  ; 5     ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 16    ;
-;     -- arithmetic mode                      ; 2     ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 8     ;
-;     -- Dedicated logic registers            ; 8     ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 86    ;
+; I/O pins                                    ; 17    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
-; Maximum fan-out node                        ; clock ;
-; Maximum fan-out                             ; 8     ;
-; Total fan-out                               ; 86    ;
-; Average fan-out                             ; 0.77  ;
 +---------------------------------------------+-------+
 
 
@@ -200,7 +196,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |aeroporto                 ; 18 (18)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 86   ; 0            ; |aeroporto          ; work         ;
+; |aeroporto                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 17   ; 0            ; |aeroporto          ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -218,14 +214,17 @@ Encoding Type:  One-Hot
 +-------------------------+-----------+--------------+-------------+-------------------------+
 
 
-+-------------------------------------------------------------+
-; Registers Removed During Synthesis                          ;
-+----------------------------------------+--------------------+
-; Register name                          ; Reason for Removal ;
-+----------------------------------------+--------------------+
-; count[4..31]                           ; Lost fanout        ;
-; Total Number of Removed Registers = 28 ;                    ;
-+----------------------------------------+--------------------+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; EA.AeroportoFuncionando               ; Lost fanout        ;
+; EA.Pousando                           ; Lost fanout        ;
+; EA.Decolando                          ; Lost fanout        ;
+; EA.Espera                             ; Lost fanout        ;
+; Total Number of Removed Registers = 4 ;                    ;
++---------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -233,14 +232,24 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 8     ;
+; Total registers                              ; 0     ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 4     ;
+; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 3     ;
+; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; No         ; |aeroporto|Selector1       ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 12 LEs               ; 4 LEs                  ; No         ; |aeroporto|Selector0       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
 +-------------------------------+
@@ -258,7 +267,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Oct 22 16:33:12 2020
+    Info: Processing started: Fri Oct 23 00:42:10 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off aeroporto -c aeroporto
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file aeroporto.vhd
@@ -268,13 +277,10 @@ Info (12021): Found 2 design units, including 1 entities, in source file tb_aero
     Info (12022): Found design unit 1: tb_aeroporto-testesucesso
     Info (12023): Found entity 1: tb_aeroporto
 Info (12127): Elaborating entity "aeroporto" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at aeroporto.vhd(23): used implicit default value for signal "tempo_decorrido" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "tempo_decorrido" is stuck at GND
-Info (17049): 28 registers lost all their fanouts during netlist optimizations.
+Info (17049): 4 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 73 input pin(s) that do not drive logic
+Warning (21074): Design contains 17 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "listaDecolagem[0]"
     Warning (15610): No output dependent on input pin "listaDecolagem[1]"
     Warning (15610): No output dependent on input pin "listaDecolagem[2]"
@@ -283,79 +289,22 @@ Warning (21074): Design contains 73 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "listaPouso[1]"
     Warning (15610): No output dependent on input pin "listaPouso[2]"
     Warning (15610): No output dependent on input pin "listaPouso[3]"
-    Warning (15610): No output dependent on input pin "duracao[0]"
-    Warning (15610): No output dependent on input pin "duracao[1]"
-    Warning (15610): No output dependent on input pin "duracao[2]"
-    Warning (15610): No output dependent on input pin "duracao[3]"
-    Warning (15610): No output dependent on input pin "duracao[4]"
-    Warning (15610): No output dependent on input pin "duracao[5]"
-    Warning (15610): No output dependent on input pin "duracao[6]"
-    Warning (15610): No output dependent on input pin "duracao[7]"
-    Warning (15610): No output dependent on input pin "duracao[8]"
-    Warning (15610): No output dependent on input pin "duracao[9]"
-    Warning (15610): No output dependent on input pin "duracao[10]"
-    Warning (15610): No output dependent on input pin "duracao[11]"
-    Warning (15610): No output dependent on input pin "duracao[12]"
-    Warning (15610): No output dependent on input pin "duracao[13]"
-    Warning (15610): No output dependent on input pin "duracao[14]"
-    Warning (15610): No output dependent on input pin "duracao[15]"
-    Warning (15610): No output dependent on input pin "duracao[16]"
-    Warning (15610): No output dependent on input pin "duracao[17]"
-    Warning (15610): No output dependent on input pin "duracao[18]"
-    Warning (15610): No output dependent on input pin "duracao[19]"
-    Warning (15610): No output dependent on input pin "duracao[20]"
-    Warning (15610): No output dependent on input pin "duracao[21]"
-    Warning (15610): No output dependent on input pin "duracao[22]"
-    Warning (15610): No output dependent on input pin "duracao[23]"
-    Warning (15610): No output dependent on input pin "duracao[24]"
-    Warning (15610): No output dependent on input pin "duracao[25]"
-    Warning (15610): No output dependent on input pin "duracao[26]"
-    Warning (15610): No output dependent on input pin "duracao[27]"
-    Warning (15610): No output dependent on input pin "duracao[28]"
-    Warning (15610): No output dependent on input pin "duracao[29]"
-    Warning (15610): No output dependent on input pin "duracao[30]"
-    Warning (15610): No output dependent on input pin "duracao[31]"
-    Warning (15610): No output dependent on input pin "duracao[32]"
-    Warning (15610): No output dependent on input pin "duracao[33]"
-    Warning (15610): No output dependent on input pin "duracao[34]"
-    Warning (15610): No output dependent on input pin "duracao[35]"
-    Warning (15610): No output dependent on input pin "duracao[36]"
-    Warning (15610): No output dependent on input pin "duracao[37]"
-    Warning (15610): No output dependent on input pin "duracao[38]"
-    Warning (15610): No output dependent on input pin "duracao[39]"
-    Warning (15610): No output dependent on input pin "duracao[40]"
-    Warning (15610): No output dependent on input pin "duracao[41]"
-    Warning (15610): No output dependent on input pin "duracao[42]"
-    Warning (15610): No output dependent on input pin "duracao[43]"
-    Warning (15610): No output dependent on input pin "duracao[44]"
-    Warning (15610): No output dependent on input pin "duracao[45]"
-    Warning (15610): No output dependent on input pin "duracao[46]"
-    Warning (15610): No output dependent on input pin "duracao[47]"
-    Warning (15610): No output dependent on input pin "duracao[48]"
-    Warning (15610): No output dependent on input pin "duracao[49]"
-    Warning (15610): No output dependent on input pin "duracao[50]"
-    Warning (15610): No output dependent on input pin "duracao[51]"
-    Warning (15610): No output dependent on input pin "duracao[52]"
-    Warning (15610): No output dependent on input pin "duracao[53]"
-    Warning (15610): No output dependent on input pin "duracao[54]"
-    Warning (15610): No output dependent on input pin "duracao[55]"
-    Warning (15610): No output dependent on input pin "duracao[56]"
-    Warning (15610): No output dependent on input pin "duracao[57]"
-    Warning (15610): No output dependent on input pin "duracao[58]"
-    Warning (15610): No output dependent on input pin "duracao[59]"
-    Warning (15610): No output dependent on input pin "duracao[60]"
-    Warning (15610): No output dependent on input pin "duracao[61]"
-    Warning (15610): No output dependent on input pin "duracao[62]"
-    Warning (15610): No output dependent on input pin "duracao[63]"
+    Warning (15610): No output dependent on input pin "tempo"
     Warning (15610): No output dependent on input pin "alarme"
-Info (21057): Implemented 104 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 81 input pins
-    Info (21059): Implemented 5 output pins
-    Info (21061): Implemented 18 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 78 warnings
-    Info: Peak virtual memory: 4645 megabytes
-    Info: Processing ended: Thu Oct 22 16:33:16 2020
-    Info: Elapsed time: 00:00:04
+    Warning (15610): No output dependent on input pin "tempestade"
+    Warning (15610): No output dependent on input pin "peso"
+    Warning (15610): No output dependent on input pin "decolar"
+    Warning (15610): No output dependent on input pin "pistaLivre"
+    Warning (15610): No output dependent on input pin "imprevisto"
+    Warning (15610): No output dependent on input pin "pousar"
+    Warning (15610): No output dependent on input pin "clock"
+Info (21057): Implemented 17 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 17 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 4625 megabytes
+    Info: Processing ended: Fri Oct 23 00:42:13 2020
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 
 
