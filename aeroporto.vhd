@@ -51,7 +51,10 @@ begin
 	elsif (clock'event and clock = '1') then
 		case EA is		
 			when AeroportoFuncionando => 
-				if (decolar = '1' and pistaLivre = '1' and peso = '0') then -- Somente quando tiver aviao p/ decolar,
+				if(pistaLivre = '0' or peso = '1') then 
+					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, não?
+					EA <= AeroportoFuncionando;
+				elsif (decolar = '1') then -- Somente quando tiver aviao p/ decolar,
 			--	não houver imprevistos e a pista estiver livre ele poderá decolar
 					count := count + 1;
 					EA <= Decolando;
@@ -59,11 +62,8 @@ begin
 					-- o count não esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
 					--Não faz sentido por ele aqui, pq a FSM irá entrar aqui várias vezes, acho que o correto é estar
 					--na transição do fim do pouso ou decolagem
-				elsif (pousar = '1' and imprevisto = '0' and peso = '0' and pistaLivre = '1') then
+				elsif (pousar = '1' and imprevisto = '0') then
 					EA <= Pousando;
-				elsif (peso = '1' or pistaLivre = '0') then
-					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, não?
-					EA <= AeroportoFuncionando;
 				elsif (tempestade = '1') then
 					EA <= Espera;
 				end if;
