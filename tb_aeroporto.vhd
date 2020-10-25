@@ -43,10 +43,6 @@ end component;
 	signal t_pouso, t_decola, t_peso, t_pista : time; -- tempo de subida e descida de cada sinal
 	signal t_tempestade, t_imprevisto : time; -- tempo de subida e descida de cada sinal
 	
-	-- Sinais que definem se existe algum problema que afeta o funcionamento do aeroporto ou se está tudo certo
-	signal tudo_ok, p_tempestade, p_imprevisto : std_logic_vector (1 downto 0); -- tudo_ok = segue o baile,
-	--p_tempestade = problema de tempestade, p_imprevisto = problema de imprevisto
-	
 	-- Sinais para saber em qual estado a fsm está
 	signal p, d, e, af, imprev : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
 	-- i = imprevisto
@@ -56,7 +52,6 @@ end component;
 	--ele é igual a 2 ns, pois é o tempo de atraso para começar o primeiro estado 
 	signal r_time1, r_time2, r_time3, r_time4, r_time5	: integer; -- irão receber o valor de t1,t2,t3... porém
 	--convertidos para inteiro
-	signal teste : real;
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
@@ -303,7 +298,7 @@ escreve_output : process
 	variable linea : line;
 	begin
 	wait for 0.1 ns;
-	r_time1 <= t1/time'val(1000000);
+	r_time1 <= t1/time'val(1000000); -- transforma o tempo em ns para inteiro
 	r_time2 <= t2/time'val(1000000);
 	r_time3 <= t3/time'val(1000000);
 	r_time4 <= t4/time'val(1000000);
@@ -313,18 +308,18 @@ escreve_output : process
 	if (flag_write <= '1') then
 	wait for 1 ns;
 		if (d = '1') then
-			write (linea, decola);
-			write (linea, t2);
-			write (linea, space4);			
-			write (linea, t_transicao);
-			write (linea, aux);
-			write (linea, space);
-			write (linea, t_real);
-			write (linea, (r_time2*10)/5);
-			write (linea, minute);
+			write (linea, decola);			--imprime o texto "Tempo decola: "
+			write (linea, t2);				--imprime o tempo desse estado
+			write (linea, space4);			--imprime alguns espaços no arquivo
+			write (linea, t_transicao);	--imprime o texto "Transição: "
+			write (linea, aux);				--imrpime o tempo em ns de quando se incia o estado
+			write (linea, space);			--imprime alguns espaços no arquivo
+			write (linea, t_real);			--imprime o texto "Tempo real: "
+			write (linea, (r_time2*10)/5);--imprime a conversão do tempo em ns para minutos/hora
+			write (linea, minute);			--impriem o texto " min"
 			writeline (outputs1, linea);
 			wait for t2;
-			aux <= aux + t2;
+			aux <= aux + t2;					--soma a duração do estado com o tempo armazenado em aux
 		elsif (p = '1') then
 			write (linea, pousa);
 			write (linea, t3);
