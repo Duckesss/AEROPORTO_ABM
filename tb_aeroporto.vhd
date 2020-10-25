@@ -48,27 +48,36 @@ end component;
 	--p_tempestade = problema de tempestade, p_imprevisto = problema de imprevisto
 	
 	-- Sinais para saber em qual estado a fsm está
-	signal p, d, e, af : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
+	signal p, d, e, af, imprev : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
+	-- i = imprevisto
 	
 	-- Sinal auxiliar
-	signal aux : time := 2 ns;		-- sinal auxiliar para contar o tempo dos horários de transição, ele é igual
-											-- a 2 ns, pois é o tempo de atraso para começar o primeiro estado
+	signal aux : time := 2 ns;		-- sinal auxiliar para contar o tempo dos horários de transição,
+	--ele é igual a 2 ns, pois é o tempo de atraso para começar o primeiro estado 
+	signal r_time1, r_time2, r_time3, r_time4, r_time5	: integer; -- irão receber o valor de t1,t2,t3... porém
+	--convertidos para inteiro
+	signal teste : real;
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
 	file tempo_estado    : text open read_mode is "duracao_estado.txt";
 	file tempo_sinal		: text open read_mode is "tempo_sinais.txt";
-	file def_problema		: text open read_mode is "define_problema.txt";
 	file outputs1			: text open write_mode is "saida1.txt";
 	
 	constant decola 	: string (1 to 17) := "Tempo decolando: ";
 	constant pousa 	: string (1 to 16) := "Tempo pousando: ";
 	constant aeroportoFunciona 	: string (1 to 10) := "Tempo AF: ";
 	constant espera 	: string (1 to 14) := "Tempo espera: ";
-	constant t_transicao : string (1 to 18) := "     Transição: ";
-	constant space1	: string (1 to 1) := " ";
-	constant space2 	: string (1 to 8) := "        "; 
-	constant space3	: string (1 to 3) := "   ";
+	constant imp		: string (1 to 18) := "Tempo imprevisto: ";
+	constant t_transicao : string (1 to 17) := "    Transição: ";
+	constant t_real	: string (1 to 12) := "Tempo real: ";
+	constant minute	: string (1 to 4) := " min";
+	constant hora		: string (1 to 8) := " hora(s)";
+	constant space 	: string (1 to 5) := "     ";
+	constant space1	: string (1 to 2) := "  ";
+	constant space2 	: string (1 to 9) := "         "; 
+	constant space3	: string (1 to 4) := "    ";
+	constant space4	: string (1 to 1) := " ";
 
 	-- Clock period definitions
    constant period     : time := 20 ns;
@@ -118,6 +127,7 @@ begin
 			e <= '0';
 			af <= '0';
 			p <= '0';
+			imprev <= '0';
 			wait for (t2/2);	-- 5 ns
 			tempo <= '1';
 			alarme <= '1';
@@ -129,6 +139,7 @@ begin
 			d <= '0';
 			e <= '0';
 			af <= '0';
+			imprev <= '0';
 			wait for (t3/2);	-- 15 ns
 			tempo <= '1';
 			alarme <= '1';
@@ -139,7 +150,13 @@ begin
 			p <= '0';
 			d <= '0';
 			e <= '0';
-			af <= '1';
+			if (imprevisto = '1') then
+				imprev <= '1';
+				af <= '0';
+			else
+				af <= '1';
+				imprev <= '0';
+			end if;
 			wait for (t1/2);	-- 3 ns
 			tempo <= '1';
 			alarme <= '0';
@@ -151,6 +168,7 @@ begin
 			d <= '0';
 			e <= '1';
 			af <= '0';
+			imprev <= '0';
          wait for (t4/2);	-- 10 ns
          tempo <= '1';
 			alarme <= '0';
@@ -235,30 +253,6 @@ dura_estado : process
 end process dura_estado;
 
 ------------------------------------------------------------------------------------
------------------ processo para ler os dados do arquivo define_problema.txt
-------------------------------------------------------------------------------------
-gera_sinal : process
-	variable line1, line2, line3 : line;
-	variable vetor : std_logic_vector (1 downto 0);
-	begin
-	wait for 0.1 ns;
-	while not endfile(def_problema) loop
-		if (read_data_in2 = '1') then
-			readline(def_problema, line1);
-			read(line1, vetor);
-			tudo_ok <= vetor;
-			readline(def_problema, line2);
-			read(line2, vetor);
-			p_tempestade <= vetor;
-			readline(def_problema, line3);
-			read(line3, vetor);
-			p_imprevisto <= vetor;
-		end if;
-		wait for period;
-	end loop;
-	wait;
-end process gera_sinal;
-------------------------------------------------------------------------------------
 ----------------- processo para ler os dados do arquivo tempo_sinais.txt
 ------------------------------------------------------------------------------------
 problema : process
@@ -291,6 +285,17 @@ problema : process
 	end loop;
 	wait;
 end process problema;
+
+------------------------------------------------------------------------------------
+------ processo para escrever os dados de saida no saida.txt
+------------------------------------------------------------------------------------ 
+--testin : process
+	--variable us, ms, sec, minute : time;
+	--begin
+	--wait for 1 ns;
+	--minute := 10 min;
+	--wait;
+--end process testin;
 ------------------------------------------------------------------------------------
 ------ processo para escrever os dados de saida no saida.txt
 ------------------------------------------------------------------------------------ 
@@ -298,16 +303,26 @@ escreve_output : process
 	variable linea : line;
 	begin
 	wait for 0.1 ns;
+	r_time1 <= t1/time'val(1000000);
+	r_time2 <= t2/time'val(1000000);
+	r_time3 <= t3/time'val(1000000);
+	r_time4 <= t4/time'val(1000000);
+	r_time5 <= t_imprevisto/time'val(1000000);
 	
 	for i in 1 to 100 loop
 	if (flag_write <= '1') then
 	wait for 1 ns;
 		if (d = '1') then
 			write (linea, decola);
-			write (linea, t2);			
+			write (linea, t2);
+			write (linea, space4);			
 			write (linea, t_transicao);
 			write (linea, aux);
-			writeline (outputs1, linea);	
+			write (linea, space);
+			write (linea, t_real);
+			write (linea, (r_time2*10)/5);
+			write (linea, minute);
+			writeline (outputs1, linea);
 			wait for t2;
 			aux <= aux + t2;
 		elsif (p = '1') then
@@ -316,6 +331,10 @@ escreve_output : process
 			write (linea, space1);
 			write (linea, t_transicao);
 			write (linea, aux);
+			write (linea, space);
+			write (linea, t_real);
+			write (linea, (r_time3*30)/2);
+			write (linea, minute);
 			writeline (outputs1, linea);
 			wait for t3;
 			aux <= aux + t3;
@@ -325,6 +344,10 @@ escreve_output : process
 			write (linea, space2);
 			write (linea, t_transicao);
 			write (linea, aux);
+			write (linea, space);
+			write (linea, t_real);
+			write (linea, (r_time1*6)/6);
+			write (linea, minute);
 			writeline (outputs1, linea);
 			wait for t1;
 			aux <= aux + t1;
@@ -334,9 +357,25 @@ escreve_output : process
 			write (linea, space3);
 			write (linea, t_transicao);
 			write (linea, aux);
+			write (linea, space);
+			write (linea, t_real);
+			write (linea, (r_time4*20)/20);
+			write (linea, hora);
 			writeline (outputs1, linea);
 			wait for t4;
 			aux <= aux + t4;
+		elsif (imprev = '1') then
+			write (linea, imp);
+			write (linea, t_imprevisto);
+			write (linea, t_transicao);
+			write (linea, aux);
+			write (linea, space);
+			write (linea, t_real);
+			write (linea, (r_time5*15)*2);
+			write (linea, minute);
+			writeline (outputs1, linea);
+			wait for t_imprevisto;
+			aux <= aux + t_imprevisto;
 		end if;
 	end if;
 	end loop;

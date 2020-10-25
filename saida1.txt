@@ -1,24 +1,20 @@
-Tempo decolando: 10 ns     Transição: 2 ns
-Tempo pousando: 30 ns      Transição: 12 ns
-Tempo espera: 20 ns        Transição: 42 ns
-Tempo decolando: 10 ns     Transição: 62 ns
-Tempo pousando: 30 ns      Transição: 72 ns
-Tempo AF: 6 ns             Transição: 102 ns
-Tempo AF: 6 ns             Transição: 108 ns
-Tempo AF: 6 ns             Transição: 114 ns
-Tempo pousando: 30 ns      Transição: 120 ns
-Tempo AF: 6 ns             Transição: 150 ns
-Tempo AF: 6 ns             Transição: 156 ns
-Tempo AF: 6 ns             Transição: 162 ns
-Tempo espera: 20 ns        Transição: 168 ns
-Tempo espera: 20 ns        Transição: 188 ns
-Tempo AF: 6 ns             Transição: 208 ns
-Tempo AF: 6 ns             Transição: 214 ns
-Tempo espera: 20 ns        Transição: 220 ns
-Tempo pousando: 30 ns      Transição: 240 ns
-Tempo espera: 20 ns        Transição: 270 ns
-Tempo pousando: 30 ns      Transição: 290 ns
-Tempo espera: 20 ns        Transição: 320 ns
-Tempo AF: 6 ns             Transição: 340 ns
-Tempo decolando: 10 ns     Transição: 346 ns
-Tempo pousando: 30 ns      Transição: 356 ns
+Tempo decolando: 10 ns     Transição: 2 ns     Tempo real: 2 min
+Tempo pousando: 30 ns      Transição: 12 ns     Tempo real: 15 min
+Tempo espera: 20 ns        Transição: 42 ns     Tempo real: 1 hora(s)
+Tempo decolando: 10 ns     Transição: 62 ns     Tempo real: 2 min
+Tempo pousando: 30 ns      Transição: 72 ns     Tempo real: 15 min
+Tempo AF: 6 ns             Transição: 102 ns     Tempo real: 1 min
+Tempo imprevisto: 15 ns    Transição: 108 ns     Tempo real: 30 min
+Tempo pousando: 30 ns      Transição: 123 ns     Tempo real: 15 min
+Tempo AF: 6 ns             Transição: 153 ns     Tempo real: 1 min
+Tempo imprevisto: 15 ns    Transição: 159 ns     Tempo real: 30 min
+Tempo espera: 20 ns        Transição: 174 ns     Tempo real: 1 hora(s)
+Tempo espera: 20 ns        Transição: 194 ns     Tempo real: 1 hora(s)
+Tempo AF: 6 ns             Transição: 214 ns     Tempo real: 1 min
+Tempo espera: 20 ns        Transição: 220 ns     Tempo real: 1 hora(s)
+Tempo pousando: 30 ns      Transição: 240 ns     Tempo real: 15 min
+Tempo espera: 20 ns        Transição: 270 ns     Tempo real: 1 hora(s)
+Tempo pousando: 30 ns      Transição: 290 ns     Tempo real: 15 min
+Tempo espera: 20 ns        Transição: 320 ns     Tempo real: 1 hora(s)
+Tempo imprevisto: 15 ns    Transição: 340 ns     Tempo real: 30 min
+Tempo pousando: 30 ns      Transição: 355 ns     Tempo real: 15 min
