@@ -43,7 +43,7 @@ end component;
 	signal t_pouso, t_decola, t_peso, t_pista : time; -- tempo de subida e descida de cada sinal
 	signal t_tempestade, t_imprevisto : time; -- tempo de subida e descida de cada sinal
 	
-	-- Sinais para saber em qual estado a fsm está
+	-- Sinais para saber em qual estado a fsm está (IMPREVISTO NÂO EH UM ESTADO,serve apenas para escrevermos na saída)
 	signal p, d, e, af, imprev : std_logic := '0'; -- p = pousar, d = decolar, e = esperar e af = aeroporto funcionando
 	-- i = imprevisto
 	
@@ -51,7 +51,7 @@ end component;
 	signal aux : time := 2 ns;		-- sinal auxiliar para contar o tempo dos horários de transição,
 	--ele é igual a 2 ns, pois é o tempo de atraso para começar o primeiro estado 
 	signal r_time1, r_time2, r_time3, r_time4, r_time5	: integer; -- irão receber o valor de t1,t2,t3... porém
-	--convertidos para inteiro
+	--convertidos para inteiro, r de real time.
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
@@ -259,38 +259,29 @@ problema : process
 		if (read_data_in = '1') then
 			readline(tempo_sinal, line1);
 			read(line1, t);
-			t_decola <= t;
+			t_decola <= t;	--tempo gasto para decolar
 			readline(tempo_sinal, line2);
 			read(line2, t);
-			t_pouso <= t;
+			t_pouso <= t;	--tempo gasto para pousar
 			readline(tempo_sinal, line3);
 			read(line3, t);
-			t_peso <= t;
+			t_peso <= t;	--Tempo para mudar o sinal do peso
 			readline(tempo_sinal, line4);
 			read(line4, t);
-			t_pista <= t;
+			t_pista <= t;	--Tempo para mudar o sinal de pista livre
 			readline(tempo_sinal, line5);
 			read(line5, t);
-			t_tempestade <= t;
+			t_tempestade <= t;	--tempo para mudar o sinal da tempestade
 			readline(tempo_sinal, line6);
 			read(line6, t);
-			t_imprevisto <= t;
+			t_imprevisto <= t;	--tempo para mudar o sinal do imprevisto
 		end if;
 		wait for period;
 	end loop;
 	wait;
 end process problema;
 
-------------------------------------------------------------------------------------
------- processo para escrever os dados de saida no saida.txt
------------------------------------------------------------------------------------- 
---testin : process
-	--variable us, ms, sec, minute : time;
-	--begin
-	--wait for 1 ns;
-	--minute := 10 min;
-	--wait;
---end process testin;
+
 ------------------------------------------------------------------------------------
 ------ processo para escrever os dados de saida no saida.txt
 ------------------------------------------------------------------------------------ 
@@ -308,7 +299,7 @@ escreve_output : process
 	if (flag_write <= '1') then
 	wait for 1 ns;
 		if (d = '1') then
-			write (linea, decola);			--imprime o texto "Tempo decola: "
+			write (linea, decola);			--imprime o texto "Tempo decolando: "
 			write (linea, t2);				--imprime o tempo desse estado
 			write (linea, space4);			--imprime alguns espaços no arquivo
 			write (linea, t_transicao);	--imprime o texto "Transição: "
@@ -410,6 +401,7 @@ tb_estimulo2 : process
 
 END process tb_estimulo2;
 	
+	
 ------------------------------------------------------------------------------------
 ----------------- processo para gerar os sinais de tempestade
 ------------------------------------------------------------------------------------
@@ -423,6 +415,7 @@ previsao_tempo : process
 			wait for t_tempestade;
       end loop tempestade_loop;
 end process;
+
 
 --------------------------------------------------------------------------------------
 ----------------- processo para gerar o sinal de decolar 
@@ -438,6 +431,7 @@ decolando : process  -- 15 ns em alto e 15 ns em baixo
       end loop decola_loop;
 end process;
 
+
 --------------------------------------------------------------------------------------
 ----------------- processo para gerar o sinal de pousar 
 --------------------------------------------------------------------------------------
@@ -451,6 +445,7 @@ quero_pousar : process  -- 15 ns em alto e 15 ns em baixo
 			wait for t_pouso;
       end loop pousa_loop;
 end process;
+
 
 --------------------------------------------------------------------------------------
 ----------------- processo para gerar o sinal de peso 
@@ -466,6 +461,7 @@ sinal_peso : process -- 30 ns em alto e 30 ns em baixo
 		end loop peso_loop;
 end process;
 
+
 --------------------------------------------------------------------------------------
 ----------------- processo para gerar o sinal de imprevisto 
 --------------------------------------------------------------------------------------
@@ -479,6 +475,7 @@ sinal_imprevisto : process   --15 ns em baixo e 15 ns em alto
 			wait for t_imprevisto;
 		end loop imprevisto_loop;
 end process;
+
 
 --------------------------------------------------------------------------------------
 ----------------- processo para gerar o sinal de pistaLivre 

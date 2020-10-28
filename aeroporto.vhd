@@ -49,17 +49,11 @@ begin
 	elsif (clock'event and clock = '1') then
 		case EA is		
 			when AeroportoFuncionando => 
-				-- esse if aqui em cima faz nao ter que ficar repetindo pistaLivre = '1' and peso = '0' nas outras condicoes
-				if(pistaLivre = '0' or peso = '1') then --	nÃ£o houver imprevistos e a pista estiver livre ele poderÃ¡ decolar
-					--EA <= Espera; --?? Quando isso acontece o aviao deve ser mandado pra outro estado de espera, nÃ£o?
+				
+				if(pistaLivre = '0' or peso = '1') then --	Ele fica aqui se a pista não estiver livre ou o peso for maior que o suportado
 					EA <= AeroportoFuncionando;
 				elsif (decolar = '1' and tempestade = '0') then -- Somente quando tiver aviao p/ decolar,
-					--count := count + 1;
 					EA <= Decolando;
-					--count := count + 1; -- tentei implementar um contador mostrando que 1 aviao decolou, depois outro, etc
-					-- o count nÃ£o esta funcionando depois tem que arrumar ou entao nao usa-lo no codigo
-					--NÃ£o faz sentido por ele aqui, pq a FSM irÃ¡ entrar aqui vÃ¡rias vezes, acho que o correto Ã© estar
-					--na transiÃ§Ã£o do fim do pouso ou decolagem
 				elsif (pousar = '1' and imprevisto = '0' and tempestade = '0') then
 					EA <= Pousando;
 				elsif (tempestade = '1') then
@@ -69,12 +63,11 @@ begin
 			when Decolando =>
 				if (tempestade = '1') then
 					EA <= Espera;
-				elsif (tempestade = '0') then -- alterei aqui e tirei a variavel tempo como condiÃ§Ã£o
+				elsif (tempestade = '0') then -- Tempestade passou
 					EA <= AeroportoFuncionando;
 				end if;
 				
 			when Pousando =>
-				--count := count + 1;
 				if (tempestade = '1' or imprevisto = '1' ) then
 					EA <= Espera;
 				elsif (pousar = '0' or decolar = '1') then			-- alterei de tempo = '1' p/ pousar = '0'
@@ -89,7 +82,5 @@ begin
 				end if;
 		end case;
 	end if;
-	
-	--contador <= count; 
 	end process;
 end arch;
