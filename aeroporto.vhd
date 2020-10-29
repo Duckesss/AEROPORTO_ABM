@@ -19,15 +19,7 @@ port(
 		pistaLivre		:  in std_logic;
 		clock 			:  in std_logic;
 		alarme 			:  in std_logic	
-		--contador			:  out integer range 0 to 10
 );
-
-
--------------------------------------------------------------------------------------
-------------------------   DECLARAÃ‡ÃƒO DE ATRIBUTOS    -------------------------------
--------------------------------------------------------------------------------------
---attribute temp_deco_Tempestade : std_logic;
---attribute temp_deco_Tempestade of tempestade : signal is tempestade(tempestade'last_event);
 
 
 end aeroporto;
@@ -41,10 +33,8 @@ architecture arch of aeroporto is
 	
 begin
 	process(clock, EA, pousar, decolar, imprevisto, peso, tempestade, pistaLivre) -- Toda vez que o clock ou o estado mudar o process deve ser checado
-	--variable count : integer := 0;
-		--variavel tempo Ã© especial e vai ter que ter uma funcao p/ habilitÃ¡-la com 1 ou 0
 	begin
-	if (pousar = '0' and decolar = '0') then -- enquanto nÃ£o hÃ¡ trÃ¡fego o estado pernece em AF
+	if (pousar = '0' and decolar = '0') then -- enquanto nao ha tráfego o estado pernece em AF
 		EA <= AeroportoFuncionando;
 	elsif (clock'event and clock = '1') then
 		case EA is		
@@ -70,7 +60,7 @@ begin
 			when Pousando =>
 				if (tempestade = '1' or imprevisto = '1' ) then
 					EA <= Espera;
-				elsif (pousar = '0' or decolar = '1') then			-- alterei de tempo = '1' p/ pousar = '0'
+				elsif (pousar = '0' or decolar = '1') then
 					EA <= AeroportoFuncionando;
 				end if;
 			

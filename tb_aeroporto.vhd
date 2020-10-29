@@ -52,6 +52,7 @@ end component;
 	--ele é igual a 2 ns, pois é o tempo de atraso para começar o primeiro estado 
 	signal r_time1, r_time2, r_time3, r_time4, r_time5	: integer; -- irão receber o valor de t1,t2,t3... porém
 	--convertidos para inteiro, r de real time.
+	signal count : integer := 0;
 
 	file inputs_data_in	: text open read_mode is "aviao_decola.txt";
 	file inputs_data_in2 : text open read_mode is "aviao_pousa.txt";
@@ -287,6 +288,7 @@ end process problema;
 ------------------------------------------------------------------------------------ 
 escreve_output : process
 	variable linea : line;
+	variable cont  : integer range 0 to 15;
 	begin
 	wait for 0.1 ns;
 	r_time1 <= t1/time'val(1000000); -- transforma o tempo em ns para inteiro
@@ -337,6 +339,10 @@ escreve_output : process
 			writeline (outputs1, linea);
 			wait for t1;
 			aux <= aux + t1;
+			cont := cont + 1;
+			if cont = 2 then
+				aux <= aux + (t1*2);
+			end if;
 		elsif (e = '1') then
 			write (linea, espera);
 			write (linea, t4);
@@ -361,7 +367,7 @@ escreve_output : process
 			write (linea, minute);
 			writeline (outputs1, linea);
 			wait for t_imprevisto;
-			aux <= aux + t_imprevisto;
+			aux <= aux + t_imprevisto+(t1/2);
 		end if;
 	end if;
 	end loop;
